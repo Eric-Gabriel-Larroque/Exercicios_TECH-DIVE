@@ -22,7 +22,7 @@
 
 A conta Poupança contém a funcionalidade adicional de simular o valor ganho, **em meses** (informado pelo usuário), de sua renda mensal investida na conta poupança (taxa fixa de 6.475% ao ano);
 
-## Features da Conta Investumento:
+## Features da Conta Investimento:
 
 Com a conta de investimento, o usuário poderá simular o valor ganho anualmente com o investimento escolhido, dentre estes sendo:
 
