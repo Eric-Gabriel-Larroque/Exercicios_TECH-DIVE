@@ -131,7 +131,7 @@ public abstract class Jogador extends Personagem implements Atacante {
                     "Escolha a sua arma: "+todasAsArmas);
         }
         this.arma = listaArmas.get(Integer.parseInt(resposta)-1);
-        JOptionPane.showMessageDialog(null,"Sua arma é o(a) "+arma);
+        JOptionPane.showMessageDialog(null,"Sua arma é o(a) "+arma.getArma());
 
         JOptionPane.showMessageDialog(null,
                 "Bem-vindo(a), "+ classe.getClass().getSimpleName()+"(a) "+classe.getNome()+"."+
