@@ -61,7 +61,6 @@ public class Interacao {
 
     public static void mensagemMotivacao(Jogador jogador) {
 
-        // TODO: if (motivação do jogador == VINGANÇA)
         if(jogador.getMotivacao().getValue().equals("vingança")) {
             JOptionPane.showMessageDialog(null,
                     "Imagens daquela noite trágica invadem sua mente.\n"
@@ -111,7 +110,6 @@ public class Interacao {
         JOptionPane.showMessageDialog(null,
                 "Você só pode ir à frente, ou desistir.");
 
-        // TODO: perguntar ao jogador se o personagem segue em frente ou desiste
         String continuarOuDesistir =
                 escolherOpcao("Você quer ir em frente ou desistir?",
                         "Continuar","Desistir");
@@ -121,7 +119,7 @@ public class Interacao {
             JOptionPane.showMessageDialog(null,
                     "O medo invade o seu coração e você sente que ainda não está à altura do desafio.\n"
                             + "Você se volta para a noite lá fora, e corre em direção à segurança.");
-            // TODO: encerrar a execução do programa: System.exit(0);
+
             System.exit(0);
         }
     }
@@ -135,19 +133,16 @@ public class Interacao {
         JOptionPane.showMessageDialog(null,
                 "Você se pergunta se dentro dessa sala pode haver inimigos,\n" +
                         "ou alguma armadilha, e pondera sobre como passar pela porta.");
-        // TODO: perguntar ao jogador se deseja passar pela porta ANDANDO CUIDADOSAMENTE, CORRENDO ou SALTANDO.
 
         String passarPelaPorta =
                 escolherOpcao("Como você deseja passar pela porta?",
                         "Andando cuidadosamente","Correndo","Saltando");
 
-        // TODO: if SALTANDO
         if(passarPelaPorta.equals("Saltando")) {
             JOptionPane.showMessageDialog(null,
                     "Você se concentra e pula em direção à luz," +
                             "\nsaltando de antes da porta até o interior da sala.");
         }
-        // TODO: else if CORRENDO
         else if(passarPelaPorta.equals("Correndo")) {
             JOptionPane.showMessageDialog(null,
                     "Você respira fundo e desata a correr em direção à sala.");
@@ -164,7 +159,7 @@ public class Interacao {
                             "que soltou flechas de uma escotilha aberta no teto,\n"
                             +"mas por sorte você entrou correndo e conseguiu escapar desse ataque surpresa.");
         }
-        // TODO: else
+
         else {
             JOptionPane.showMessageDialog(null,
                     "Você toma cuidado e vai caminhando vagarosamente em direção à luz.");
@@ -179,7 +174,6 @@ public class Interacao {
                             "e você salta para dentro da sala,\n" +
                             "porém uma delas te acerta na perna.");
 
-            //TODO: instanciar objeto Armadilha e invocar método de causar dano.
             new Armadilha().atacar(jogador);
         }
     }
@@ -235,9 +229,9 @@ public class Interacao {
                 "Após derrotar o Armeiro, você percebe que seus equipamentos estão muito danificados.\n"
                 +       "Olha em volta, encarando todas aquelas peças de armaduras resistentes e em ótimo estado.");
 
-        // TODO: perguntar ao jogador se ele quer ou não pegar as armaduras novas.
+
         String pegarArmadura = escolherOpcao("Você gostaria de pegar a armadura?","Pegar armadura","Deixar");
-        // TODO: Se escolher pegar
+
         if(pegarArmadura.equals("Pegar armadura")) {
             JOptionPane.showMessageDialog(null,
                     "Você resolve usar os equipamentos do inimigo contra ele," +
@@ -250,7 +244,7 @@ public class Interacao {
             JOptionPane.showMessageDialog(null,
                     "Pontos de defesa aumentados para "+jogador.getPontosDeDefesa());
         }else {
-            // TODO: se não
+
             JOptionPane.showMessageDialog(null,
                     "Você decide que não precisa utilizar nada que venha das mãos do inimigo.");
         }
@@ -290,21 +284,19 @@ public class Interacao {
                 "Em uma mesa, você reconhece uma pequena garrafa de vidro contendo um\n" +
                         "líquido levemente rosado, pega a garrafa e pondera se deve beber um gole.");
 
-        // TODO: perguntar ao jogador se ele quer ou não beber.
+
         String beberOuNao = escolherOpcao("Você gostaria de beber da poção do alquimista?",
                 "Beber", "Não beber");
-        // TODO: Se escolher beber
+
         if(beberOuNao.equals("Beber")) {
             JOptionPane.showMessageDialog(null,
                     "Você se sente revigorado para seguir adiante!");
             jogador.setSaude(jogador.getSAUDE_MAXIMA());
 
-            //TODO: pontos de saúde do jogador devem ser restaurados 100%
             JOptionPane.showMessageDialog(null,
-                    "Saúde restaurada para"+jogador.getSaude());
+                    "Saúde restaurada para "+jogador.getSaude());
         } else {
 
-            // TODO: se não
             JOptionPane.showMessageDialog(null,
                     "Você fica receoso de beber algo produzido pelo inimigo.");
         }
@@ -345,8 +337,6 @@ public class Interacao {
     }
 
     public static void conclusao(Jogador jogador) {
-        // se vingança:
-        // se glória:
 
         if(jogador.getMotivacao().getValue().equals("vingança")) {
                 JOptionPane.showMessageDialog(null,
