@@ -34,25 +34,24 @@ public class BatalhaFinal {
         continuarOuDesistir();
         passarPelaPorta(jogador);
         prologoArmeiro();
-        // TODO: instanciar objeto Armeiro
         Armeiro armeiro = new Armeiro();
-        // TODO: iniciar loop de combate, inimigo ataca primeiro
+        tocarAudio("audio/combat.wav");
         batalhaFinal.combate(jogador,armeiro,true);
+        tocarAudio("audio/suspense.wav");
         pegarNovaArmadura(jogador);
         prologoAlquimista();
-        // TODO: instanciar objeto Alquimista
         Alquimista alquimista = new Alquimista();
-        // TODO: iniciar loop de combate, inimigo ataca primeiro
+        tocarAudio("audio/combat.wav");
         batalhaFinal.combate(jogador,alquimista,true);
+        tocarAudio("audio/suspense.wav");
         beberPocao(jogador);
         prologoLider();
-        // TODO: jogador deve decidir se ataca ou espera
         boolean atacarOuEsperar = atacarOuEsperar();
-        // TODO: iniciar loop de combate, dependendo da resposta do jogador, ele ataca primeiro
         Lider liderMaligno = new Lider();
+        tocarAudio("audio/combat.wav");
         batalhaFinal.combate(jogador,liderMaligno,atacarOuEsperar);
+        tocarAudio("audio/conan_soundtrack.wav");
         JOptionPane.showMessageDialog(null,"Você conseguiu!");
-        // TODO: exibir mensagem de vitória de acordo com a motivação do jogador:
         conclusao(jogador);
     }
 
@@ -62,24 +61,26 @@ public class BatalhaFinal {
         }
         while(jogador.getSaude()>0&&inimigo.getSaude()>0) {
             jogador.atacar(inimigo);
+            if (inimigo.getSaude()<=0) {
+                JOptionPane.showMessageDialog(null,
+                        "O inimigo não é páreo para o seu heroísmo, e jaz imóvel aos seus pés.");
+                break;
+            }
             inimigo.atacar(jogador);
-        }
-        if(jogador.getSaude()<=0) {
-            String mensagemDeMorte =
-                    jogador.getMotivacao().getValue().equals("vingança") ?
-                            "Você não estava preparado para a força do inimigo.\n"+
-                            "Não foi possível concluir sua vingança, e agora resta\n"+
-                            "saber se alguém se vingará por você." :
+            if(jogador.getSaude()<=0) {
+                String mensagemDeMorte =
+                        jogador.getMotivacao().getValue().equals("vingança") ?
+                                "Você não estava preparado para a força do inimigo.\n" +
+                                        "Não foi possível concluir sua vingança, e agora resta\n" +
+                                        "saber se alguém se vingará por você." :
 
-                            "Você não estava preparado para a força do inimigo.\n"+
-                            "A glória que buscavas não será sua, e a cidade aguarda\n"+
-                            "por seu(sua) próximo(a) herói(na)";
-            JOptionPane.showMessageDialog(null,
-                    mensagemDeMorte);
-            System.exit(0);
-        }else if (inimigo.getSaude()<=0) {
-            JOptionPane.showMessageDialog(null,
-                    "O inimigo não é páreo para o seu heroísmo, e jaz imóvel aos seus pés.");
+                                "Você não estava preparado para a força do inimigo.\n" +
+                                        "A glória que buscavas não será sua, e a cidade aguarda\n" +
+                                        "por seu(sua) próximo(a) herói(na)";
+                JOptionPane.showMessageDialog(null,
+                        mensagemDeMorte);
+                System.exit(0);
+            }
         }
 
     }
