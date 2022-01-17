@@ -23,6 +23,7 @@ public class Audio {
                 listaDeReproducao.get(0).close();
                 listaDeReproducao.remove(0);
                 isRunning = false;
+                listaDeReproducao.add(clip);
             } else {
                 listaDeReproducao.add(clip);
             }
