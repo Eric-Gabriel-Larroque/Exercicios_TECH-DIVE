@@ -132,7 +132,14 @@ public class MensagensHistoria {
     public static String[] mensagensVitoria = {
             "Você se levanta, olha para os prisioneiros, vai de um em um e os liberta,\n"+
             "e todos vocês saem em direção à noite, retornando à cidade.\n",
-            "Seu dever está cumprido."
+            "Seu dever está cumprido.",
+            "Parabéns! Você completou o desafio",
+            "O fim de sua jornada está prestes a acabar, depois de tantas lutas e vitórias,\n"+
+            "você relembra todas as suas aventuras já vivenciadas\n"+
+            "que levaram você até aqui, onde jaz o fim.\n"+
+            "O fim de apenas uma aventura, pois enquanto há de viver,\n"+
+            "a sua última batalha vencida nunca será sua BATALHA FINAL.",
+            "Fim da Jornada."
     };
 
     public static void dispararMensagens(String[] listaDeMensagens) {
