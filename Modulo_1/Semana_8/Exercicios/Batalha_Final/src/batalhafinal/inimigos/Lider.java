@@ -1,6 +1,6 @@
 package batalhafinal.inimigos;
 
-import batalhafinal.atributos.Arma;
+import batalhafinal.enums.Arma;
 import batalhafinal.modelos.Inimigo;
 
 public class Lider extends Inimigo {
