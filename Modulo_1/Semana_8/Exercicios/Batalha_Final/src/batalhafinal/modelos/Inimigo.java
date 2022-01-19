@@ -18,7 +18,6 @@ public class Inimigo extends Personagem implements Atacante {
         int D20 = (int) Math.ceil(Math.random()*(20-1)+1);
         int danoDoAtaque = alvo.getPontosDeDefesa()-(D20+arma.getPontosDeAtaque()+this.getPontosDeAtaque());
         String mensagemPadrao = "";
-
         JOptionPane.showMessageDialog(null,
                 "Turno do inimigo");
 
