@@ -144,7 +144,7 @@ public abstract class Jogador extends Personagem implements Atacante {
     String motivacao = Interacao.escolherOpcao("Qual a sua motivação, aventureiro ?", Motivacao.GLORIA.getValue(),
                         Motivacao.VINGANCA.getValue());
 
-    if(motivacao.equals("Vingança")) {
+    if(motivacao.equals("vingança")) {
         jogador.motivacao = Motivacao.VINGANCA;
     } else {
         jogador.motivacao = Motivacao.GLORIA;
