@@ -105,6 +105,7 @@ public class Interacao {
         if(pegarArmadura.equals("Pegar armadura")) {
             dispararMensagens(mensagensPegarArmadura,jogador);
             jogador.setPontosDeDefesa(jogador.getPontosDeDefesa()+5);
+            Audio.tocarAudio("audio/02 - PauseMenu.wav",false);
             JOptionPane.showMessageDialog(null,"Pontos de defesa aumentados para "
                     +jogador.getPontosDeDefesa());
         }else {
@@ -126,7 +127,7 @@ public class Interacao {
         if (beberOuNao.equals("Beber")) {
             dispararMensagens(mensagensBeberPocao, jogador);
             jogador.setSaude(jogador.getSAUDE_MAXIMA());
-
+            Audio.tocarAudio("audio/24 - EnergyFill.wav",false);
             JOptionPane.showMessageDialog(null,
                     "Saúde restaurada para " + jogador.getSaude());
         } else {
