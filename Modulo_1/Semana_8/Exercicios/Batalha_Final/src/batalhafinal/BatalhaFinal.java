@@ -22,12 +22,12 @@ public class BatalhaFinal {
         Jogador jogador = null;
         BatalhaFinal batalhaFinal = new BatalhaFinal();
 
-        tocarAudio("audio/conan_soundtrack.wav");
+        tocarAudio("audio/conan_soundtrack.wav",true);
         JOptionPane.showMessageDialog(null,"Seja bem vindo(a) à BATALHA FINAL!");
          nome = Jogador.setNome();
          sexo = Jogador.setSexo();
          jogador = Jogador.setClasse(nome,sexo);
-        tocarAudio("audio/suspense.wav");
+        tocarAudio("audio/suspense.wav",true);
         iniciar();
         Jogador.setMotivacao(jogador);
         mensagemMotivacao(jogador);
@@ -35,22 +35,22 @@ public class BatalhaFinal {
         passarPelaPorta(jogador);
         prologoArmeiro(jogador);
         Armeiro armeiro = new Armeiro();
-        tocarAudio("audio/combat.wav");
+        tocarAudio("audio/combat.wav",true);
         batalhaFinal.combate(jogador,armeiro,true);
-        tocarAudio("audio/suspense.wav");
+        tocarAudio("audio/suspense.wav",true);
         pegarNovaArmadura(jogador);
         prologoAlquimista(jogador);
         Alquimista alquimista = new Alquimista();
-        tocarAudio("audio/combat.wav");
+        tocarAudio("audio/combat.wav",true);
         batalhaFinal.combate(jogador,alquimista,true);
-        tocarAudio("audio/suspense.wav");
+        tocarAudio("audio/suspense.wav",true);
         beberPocao(jogador);
         prologoLider(jogador);
         boolean atacarOuEsperar = atacarOuEsperar();
         Lider liderMaligno = new Lider();
-        tocarAudio("audio/combat.wav");
+        tocarAudio("audio/combat.wav",true);
         batalhaFinal.combate(jogador,liderMaligno,atacarOuEsperar);
-        tocarAudio("audio/conan_soundtrack.wav");
+        tocarAudio("audio/conan_soundtrack.wav",true);
         JOptionPane.showMessageDialog(null,"Você conseguiu!");
         conclusao(jogador);
     }
@@ -76,7 +76,9 @@ public class BatalhaFinal {
 
                                 "Você não estava preparado para a força do inimigo.\n" +
                                         "A glória que buscavas não será sua, e a cidade aguarda\n" +
-                                        "por seu(sua) próximo(a) herói(na)";
+                                        "por seu(sua) próximo herói";
+                mensagemDeMorte=jogador.getSexo().equals("F")?mensagemDeMorte.replace("próximo herói","próxima heroína"):
+                mensagemDeMorte;
                 JOptionPane.showMessageDialog(null,
                         mensagemDeMorte);
                 System.exit(0);
