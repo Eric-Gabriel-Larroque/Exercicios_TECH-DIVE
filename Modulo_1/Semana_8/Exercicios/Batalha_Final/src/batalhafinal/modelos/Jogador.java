@@ -136,15 +136,23 @@ public abstract class Jogador extends Personagem implements Atacante {
                     "Escolha a sua arma: "+todasAsArmas);
         }
         this.arma = listaArmas.get(Integer.parseInt(resposta)-1);
-        JOptionPane.showMessageDialog(null,"Sua arma é o(a) "+arma.getArma());
+
+        String mensagemArma = arma.getArma().matches("(espada|besta|clava)") ?
+                "Sua arma é a "+arma.getArma():
+                "Sua arma é o "+arma.getArma();
+        String mensagemArmaPontosAtq  = arma.getArma().matches("(espada|besta|clava)") ?
+                "\nAtaque da "+classe.getArmaNome():
+                "\nAtaque do "+classe.getArmaNome();
+        JOptionPane.showMessageDialog(null,mensagemArma);
 
         String saudacao = sexo.equals("M")?"Bem-vindo, "+ classe.getClass().getSimpleName():
                 "Bem-vinda, "+ classe.getClass().getSimpleName().replace("o","a");
 
+
         JOptionPane.showMessageDialog(null,
                 saudacao+" "+classe.getNome()+"."+
                         "\nSeus atributos são:\nAtaque: "+classe.getPontosDeAtaque()+"\nDefesa: "+classe.getPontosDeDefesa()+
-                        "\nAtaque do(a) "+classe.getArmaNome()+": "+classe.getArmaPontos());
+                        mensagemArmaPontosAtq+": "+classe.getArmaPontos());
         return this.arma;
     }
 
