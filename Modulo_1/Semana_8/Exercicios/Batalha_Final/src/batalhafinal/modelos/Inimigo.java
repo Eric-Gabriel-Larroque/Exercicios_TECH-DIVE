@@ -1,6 +1,6 @@
 package batalhafinal.modelos;
 
-import batalhafinal.atributos.Arma;
+import batalhafinal.enums.Arma;
 
 import javax.swing.*;
 

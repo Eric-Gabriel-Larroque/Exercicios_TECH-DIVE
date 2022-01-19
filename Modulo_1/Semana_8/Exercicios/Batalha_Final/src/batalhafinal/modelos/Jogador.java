@@ -1,7 +1,7 @@
 package batalhafinal.modelos;
 
-import batalhafinal.atributos.Arma;
-import batalhafinal.atributos.Motivacao;
+import batalhafinal.enums.Arma;
+import batalhafinal.enums.Motivacao;
 import batalhafinal.herois.Arqueiro;
 import batalhafinal.herois.Guerreiro;
 import batalhafinal.herois.Mago;
@@ -54,6 +54,10 @@ public abstract class Jogador extends Personagem implements Atacante {
         return sexo.toUpperCase();
     }
 
+    public String getSexo() {
+        return this.sexo;
+    }
+
 
     public static Jogador setClasse(String nome, String sexo)
     throws IllegalArgumentException,
@@ -61,13 +65,14 @@ public abstract class Jogador extends Personagem implements Atacante {
         Jogador classeEscolhida = null;
         Integer[] opcoes = {1,2,3,4};
         int resposta = 0;
-
+        String mensagemPadrao = sexo.equals("M")?
+                "\n1 - Arqueiro\n2 - Guerreiro\n3 - Mago\n4 - Paladino":
+                "\n1 - Arqueira\n2 - Guerreira\n3 - Maga\n4 - Paladina";
 
        do{
             try {
                 resposta = Integer.parseInt( JOptionPane.showInputDialog(null,
-                        "Escolha sua classe:\n1 - Arqueiro(a)\n2 - Guerreiro(a)" +
-                                "\n3 - Mago(a)\n4 - Paladino(a)"));
+                        "Escolha a sua classe: "+mensagemPadrao));
             } catch (IllegalArgumentException illegalArgumentException) {
                 JOptionPane.showMessageDialog(null,
                         "Somente números são permitidos. Tente novamente",
@@ -133,15 +138,19 @@ public abstract class Jogador extends Personagem implements Atacante {
         this.arma = listaArmas.get(Integer.parseInt(resposta)-1);
         JOptionPane.showMessageDialog(null,"Sua arma é o(a) "+arma.getArma());
 
+        String saudacao = sexo.equals("M")?"Bem-vindo, "+ classe.getClass().getSimpleName():
+                "Bem-vinda, "+ classe.getClass().getSimpleName().replace("o","a");
+
         JOptionPane.showMessageDialog(null,
-                "Bem-vindo(a), "+ classe.getClass().getSimpleName()+"(a) "+classe.getNome()+"."+
+                saudacao+" "+classe.getNome()+"."+
                         "\nSeus atributos são:\nAtaque: "+classe.getPontosDeAtaque()+"\nDefesa: "+classe.getPontosDeDefesa()+
                         "\nAtaque do(a) "+classe.getArmaNome()+": "+classe.getArmaPontos());
         return this.arma;
     }
 
     public static void setMotivacao(Jogador jogador) {
-    String motivacao = Interacao.escolherOpcao("Qual a sua motivação, aventureiro ?", Motivacao.GLORIA.getValue(),
+        String mensagem = jogador.getSexo().equals("F")?"Qual a sua motivação, aventureira?":"Qual sua motivação, aventureiro?";
+    String motivacao = Interacao.escolherOpcao(mensagem, Motivacao.GLORIA.getValue(),
                         Motivacao.VINGANCA.getValue());
 
     if(motivacao.equals("vingança")) {
