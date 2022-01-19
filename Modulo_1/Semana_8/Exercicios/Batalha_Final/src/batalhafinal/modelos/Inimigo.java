@@ -22,24 +22,29 @@ public class Inimigo extends Personagem implements Atacante {
         JOptionPane.showMessageDialog(null,
                 "Turno do inimigo");
 
-        if(D20==1) {
+        if(D20==1||danoDoAtaque>=0) {
             JOptionPane.showMessageDialog(null,
                     "   O inimigo errou o ataque! Você não sofreu dano.");
         } else if (D20 == 20) {
             danoDoAtaque = D20+arma.getPontosDeAtaque()+this.getPontosDeAtaque();
             novaSaude = alvo.getSaude()-danoDoAtaque;
-            alvo.setSaude(novaSaude);
+            String mensagemCritico = arma.getArma().matches("espada") ?
+                    "O inimigo acertou um ataque crítico com a sua "+arma.getArma()+"!\n":
+                    "O inimigo acertou um ataque critico com o seu "+arma.getArma()+"!\n";
+                    alvo.setSaude(novaSaude);
             JOptionPane.showMessageDialog(null,
-                    "O inimigo acertou um ataque crítico!\n"+
+                    mensagemCritico+
                             "Você sofreu "+Math.abs(danoDoAtaque)+" de dano e agora possui\n"+
                             alvo.getSaude()+" pontos de vida.");
         } else {
             novaSaude = alvo.getSaude()-Math.abs(danoDoAtaque);
             alvo.setSaude(novaSaude);
+            String mensasgemAtaque = arma.getArma().matches("espada") ?
+                    "O inimigo atacou com a sua "+arma.getArma()+"!\n":
+                    "O inimigo atacou com o seu "+arma.getArma()+"!\n";
             JOptionPane.showMessageDialog(null,
-                    "O inimigo atacou!"+
-
-                            "Você sofreu "+Math.abs(danoDoAtaque)+" de dano e agora possui\n"+
+                    mensasgemAtaque+"Você sofreu "
+                            +Math.abs(danoDoAtaque)+" de dano e agora possui\n"+
                             alvo.getSaude()+" pontos de vida.");
         }
     }
