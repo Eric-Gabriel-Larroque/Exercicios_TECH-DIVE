@@ -50,7 +50,7 @@ public class BatalhaFinal {
         Lider liderMaligno = new Lider();
         tocarAudio("audio/combat.wav",true);
         batalhaFinal.combate(jogador,liderMaligno,atacarOuEsperar);
-        tocarAudio("audio/conan_soundtrack.wav",true);
+        tocarAudio("audio/victory.wav",true);
         JOptionPane.showMessageDialog(null,"Você conseguiu!");
         conclusao(jogador);
     }
