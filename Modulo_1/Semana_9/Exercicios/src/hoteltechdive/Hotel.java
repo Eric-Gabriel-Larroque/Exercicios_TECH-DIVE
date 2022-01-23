@@ -38,12 +38,10 @@ public class Hotel {
         }
         opcoes(hospede);
     }
-
     public void sair() {
         JOptionPane.showMessageDialog(null,"Volte sempre!");
         System.exit(0);
     }
-
     public static void main(String[] args){
         new Hotel().iniciarAtendimento();
     }
