@@ -1,10 +1,8 @@
 package hoteltechdive.hospede;
 
 import hoteltechdive.reserva.Reserva;
-
 import javax.swing.*;
 import java.text.DecimalFormat;
-import java.text.DecimalFormat.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -125,7 +123,6 @@ public class Hospede {
                 this.reserva = new Reserva();
             }
         }
-
     }
 
     public void cancelarReserva() {
