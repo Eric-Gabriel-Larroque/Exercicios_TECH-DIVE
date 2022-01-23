@@ -28,6 +28,7 @@ public class Reserva {
     private int acompanhantes;
     private static List<Reserva> listaReserva = new ArrayList<>();
     private double valorTotal;
+
     public Reserva() {
         this.dataMinimaParaReserva = setDataMinimaParaReserva();
         this.quartoEscolhido = setQuarto(this.quartoEscolhido);
@@ -38,12 +39,6 @@ public class Reserva {
         this.diasDaDiaria = setDiasDaDiaria();
         this.valorTotal = setValorTotal();
         listaReserva.add(this);
-    }
-
-
-
-    public void reservar() {
-
     }
 
     public LocalDate getDataMinimaParaReserva() {
