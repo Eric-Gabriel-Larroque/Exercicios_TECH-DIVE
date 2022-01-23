@@ -16,7 +16,6 @@ public class Validacao {
             opcoes.add(i+1);
             listarOpcoes+= "\n"+(i+1)+" - "+opcoesPossiveis[i];
         }
-
         do {
             try {
                 resposta =
