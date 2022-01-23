@@ -1,10 +1,7 @@
 package hoteltechdive;
 
 import hoteltechdive.hospede.Hospede;
-
 import static hoteltechdive.util.Validacao.*;
-
-
 import javax.swing.*;
 
 public class Hotel {
