@@ -17,7 +17,6 @@ public enum Quartos {
         this.diariaNasBaixas = diariaNasBaixas;
         this.quartosDisponiveis = quartosDisponiveis;
     }
-
     public String getNomeDoQuarto() {
         return nomeDoQuarto;
     }
