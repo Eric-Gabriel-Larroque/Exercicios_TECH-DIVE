@@ -1,7 +1,5 @@
 package hoteltechdive.util;
 
-import org.freedesktop.dbus.interfaces.Local;
-
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
