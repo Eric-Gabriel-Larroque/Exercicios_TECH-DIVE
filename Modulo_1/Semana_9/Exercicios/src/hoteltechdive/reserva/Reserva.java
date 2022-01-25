@@ -137,10 +137,16 @@ public class Reserva {
 
        int quartosDisponiveis =
                listaReserva.stream()
-                       .filter(r->r.getQuarto().equals(quarto)
-                       &&r.getDataInicialDaDiaria().equals(dataInicial)
-                       &&r.getDataTerminoDaDiaria().equals(dataTermino))
-                       .toArray().length;
+                       .filter(r-> (r.getQuarto().equals(quarto)
+                               && r.getDataInicialDaDiaria().compareTo(dataInicial) <= 0
+                               &&r.getDataTerminoDaDiaria().compareTo(dataTermino)  <= 0)||
+                               (r.getQuarto().equals(quarto)
+                               &&r.getDataInicialDaDiaria().compareTo(dataInicial) >0
+                               &&r.getDataTerminoDaDiaria().compareTo(dataTermino) <=0)||
+                               (r.getQuarto().equals(quarto)
+                               &&r.getDataInicialDaDiaria().compareTo(dataInicial)<=0
+                               &&r.getDataTerminoDaDiaria().compareTo(dataTermino)>0)
+                       ).toArray().length;
 
         if(quartosDisponiveis > this.getQuarto().getQuartosDisponiveis()) {
             listaReserva.remove(this);
