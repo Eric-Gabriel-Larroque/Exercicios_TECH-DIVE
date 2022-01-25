@@ -2,6 +2,7 @@ package hoteltechdive;
 
 import hoteltechdive.hospede.Hospede;
 import static hoteltechdive.util.Validacao.*;
+import static hoteltechdive.util.Audio.tocarAudio;
 import javax.swing.*;
 
 public class Hotel {
@@ -43,6 +44,7 @@ public class Hotel {
         System.exit(0);
     }
     public static void main(String[] args){
+        tocarAudio("audio/musiquinha_de_elevador.wav",true);
         new Hotel().iniciarAtendimento();
     }
 }
