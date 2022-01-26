@@ -20,7 +20,12 @@ public class DataHandler {
                 return false;
             }
         }
-        return dataFormatada.isBefore(datalimite.plusDays(1)) && dataFormatada.isAfter(dataMinima.minusDays(1));
+        if(datalimite.equals(LocalDate.MAX))    {
+            return dataFormatada.isBefore(datalimite)&&dataFormatada.isAfter(dataMinima);
+         }else {
+            return dataFormatada.isBefore(datalimite.plusDays(1)) && dataFormatada.isAfter(dataMinima.minusDays(1));
+        }
+
     }
 
     public static LocalDate formatar(String data) {
