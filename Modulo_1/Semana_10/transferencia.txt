@@ -1,0 +1,9 @@
+----------------TRANSFERENCIA---------------
+Nome Rementente: A
+Conta Remetente: 022267
+Tranferencia de: 100,00
+Nome Destinatario: B
+Conta Destinatario: 014613
+Dia: 31/01/2022
+Hora: 12:38
+---------------------------------------
