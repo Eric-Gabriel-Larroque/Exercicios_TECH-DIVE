@@ -1,7 +1,9 @@
 package util;
 
 import javax.swing.*;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class TimeHandler {
@@ -33,5 +35,9 @@ public class TimeHandler {
 
     public static LocalTime formatar(String horario) {
         return LocalTime.parse(horario);
+    }
+
+    public static String formatar(LocalTime horario) {
+        return LocalTime.from(horario).format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 }
