@@ -1,0 +1,34 @@
+INSERT INTO aluno
+VALUES 
+(DEFAULT,'Gabriel','(48)99800-9435','123.456.789-10','04/07/2004','M'),
+(DEFAULT,'Carlos','(51)98861-9980','345.123.765-32','05/07/2001','M'),
+(DEFAULT,'Maria','(41)97654-0989','342.352.767-12','19/08/1999','F'),
+(DEFAULT,'Marcos','(21)980807-1235','211.142.214-12','12/10/2001','M'),
+(DEFAULT,'Bianca','(55)97023-9653','231.156.445-90','24/02/2002','F');
+
+
+INSERT INTO professor
+VALUES
+(DEFAULT,'Carlos','Análise de Sistemas','(11)11111-1111'),
+(DEFAULT,'João','História','(48)91264-12234'),
+(DEFAULT,'José','Oceanografia','(51) 97564-9867'),
+(DEFAULT,'Rosane','Ciência da Computação','(55) 98732-7553'),
+(DEFAULT,'Beatriz','Administração','(51) 94532-9087');
+
+INSERT INTO curso
+VALUES
+(1,'Metodologia Ágil',DEFAULT),
+(3,'Banco de Dado',DEFAULT),
+(6,'POO',DEFAULT),
+(7,'Micro Controladores',DEFAULT),
+(2,'Algoritmos',DEFAULT);
+
+INSERT INTO endereco
+VALUES
+(DEFAULT,'Rua das Gaivotas',1020,'Ingleses','Florianopolis','Santa Catarina','-',1),
+(DEFAULT,'Rua Oscar Pereira',540,'Glória','Porto Alegre','Rio Grande do Sul','apto 202',2),
+(DEFAULT,'Rua da Praça',730,'Tiradentes','Canoas','Rio Grande do Sul','apto 402',3),
+(DEFAULT,'Rua Baker',221,'West End','Londres','Reino Unido','221b',4),
+(DEFAULT,'Rua nº50',43,'Igarapé','Rio de Janeiro','Rio de Janeiro','-',5);
+
+
