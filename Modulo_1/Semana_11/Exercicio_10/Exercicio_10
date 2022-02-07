@@ -1,0 +1,16 @@
+SELECT 
+a.Nome,a.Fone, a.Cpf, a.DataNasc, a.Sexo,
+e.Rua, e.Numero, e.Bairro, e.Cidade, e.Estado, e.Outros,
+c.Nome, c.Semestre,
+p.Nome, p.Graduacao, p.Fone
+FROM aluno a
+INNER JOIN endereco e 
+ON e.AlunoId = a.AlunoId
+INNER JOIN matrícula m
+ON m.AlunoId = a.ALunoId
+INNER JOIN curso c
+ON m.CursoId = c.CursoId
+INNER JOIN disciplina d
+ON c.cursoId = d.CursoId
+INNER JOIN professor p 
+ON d.ProfessorId = p.professorId;
