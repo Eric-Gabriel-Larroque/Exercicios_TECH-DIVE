@@ -1,0 +1,23 @@
+
+CREATE TABLE Matrícula (
+    MatriculaId INTEGER PRIMARY KEY UNIQUE DEFAULT NEXTVAL('auto_increment_matricula'),
+    AlunoId INTEGER,
+    CursoId INTEGER,
+    DataCurso DATE,
+);
+ 
+ALTER TABLE Matrícula ADD CONSTRAINT FK_Matrícula_2
+    FOREIGN KEY (CursoId)
+    REFERENCES Curso (CursoId);
+ 
+ALTER TABLE Matrícula ADD CONSTRAINT FK_Matrícula_3
+    FOREIGN KEY (AlunoId)
+    REFERENCES Aluno (AlunoId);
+
+INSERT INTO matrícula 
+VALUES
+(DEFAULT,1,1,'10/03/2022'),
+(DEFAULT,1,5,'10/07/2022'),
+(DEFAULT,2,3,'14/03/2025'),
+(DEFAULT,3,4,'17/09/2025'),
+(DEFAULT,4,1,'10/03/2022');
