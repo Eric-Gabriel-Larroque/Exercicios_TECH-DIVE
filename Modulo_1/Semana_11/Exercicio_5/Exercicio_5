@@ -1,0 +1,6 @@
+SELECT * FROM aluno al
+INNER JOIN endereco AS en
+ON al.AlunoId = en.AlunoId;
+
+SELECT * FROM aluno al
+WHERE al.nome LIKE '%a%';
