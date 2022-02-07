@@ -1,0 +1,21 @@
+CREATE TABLE Disciplina (
+    ProfessorId INTEGER,
+    CursoId INTEGER,
+    DisciplinaId INTEGER PRIMARY KEY UNIQUE DEFAULT NEXTVAL('auto_increment_disciplina')
+);
+ 
+ALTER TABLE Disciplina ADD CONSTRAINT FK_Disciplina_1
+    FOREIGN KEY (ProfessorId)
+    REFERENCES Professor (ProfessorId);
+ 
+ALTER TABLE Disciplina ADD CONSTRAINT FK_Disciplina_4
+    FOREIGN KEY (CursoId)
+    REFERENCES Curso (CursoId);
+
+INSERT INTO disciplina 
+VALUES
+(1,2,DEFAULT),
+(4,2,DEFAULT),
+(4,3,DEFAULT),
+(5,1,DEFAULT),
+(1,5,DEFAULT);
