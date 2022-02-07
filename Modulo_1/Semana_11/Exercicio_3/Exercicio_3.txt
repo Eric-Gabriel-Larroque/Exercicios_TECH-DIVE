@@ -1,0 +1,93 @@
+/* brModelo: */
+
+CREATE SEQUENCE auto_increment_aluno;
+CREATE SEQUENCE auto_increment_prof;
+CREATE SEQUENCE auto_increment_curso;
+CREATE SEQUENCE auto_increment_endereco;
+CREATE SEQUENCE auto_increment_matricula;
+CREATE SEQUENCE auto_increment_disciplina;
+
+# ENTIDADE ALUNO: 
+
+
+
+
+CREATE TABLE Aluno (
+    AlunoId INTEGER PRIMARY KEY UNIQUE DEFAULT NEXTVAL('auto_increment_aluno'),
+    Nome VARCHAR,
+    Fone VARCHAR,
+    Cpf VARCHAR,
+    DataNasc DATE,
+    Sexo CHAR
+);
+
+
+# ENTIDADE MATRICULA:
+
+
+CREATE TABLE Matrícula (
+    MatriculaId INTEGER PRIMARY KEY UNIQUE DEFAULT NEXTVAL('auto_increment_matricula'),
+    AlunoId INTEGER,
+    CursoId INTEGER,
+    DataCurso DATE,
+);
+ 
+ALTER TABLE Matrícula ADD CONSTRAINT FK_Matrícula_2
+    FOREIGN KEY (CursoId)
+    REFERENCES Curso (CursoId);
+ 
+ALTER TABLE Matrícula ADD CONSTRAINT FK_Matrícula_3
+    FOREIGN KEY (AlunoId)
+    REFERENCES Aluno (AlunoId);
+
+# ENTIDADE PROFESSOR:
+
+CREATE TABLE Professor (
+    ProfessorId INTEGER PRIMARY KEY UNIQUE DEFAULT NEXTVAL('auto_increment_prof'),
+    Nome VARCHAR,
+    Graduacao VARCHAR,
+    Fone VARCHAR
+);
+
+# ENTIDADE DISCIPLINA
+
+CREATE TABLE Disciplina (
+    ProfessorId INTEGER,
+    CursoId INTEGER,
+    DisciplinaId INTEGER PRIMARY KEY UNIQUE DEFAULT NEXTVAL('auto_increment_disciplina')
+);
+ 
+ALTER TABLE Disciplina ADD CONSTRAINT FK_Disciplina_1
+    FOREIGN KEY (ProfessorId)
+    REFERENCES Professor (ProfessorId);
+ 
+ALTER TABLE Disciplina ADD CONSTRAINT FK_Disciplina_4
+    FOREIGN KEY (CursoId)
+    REFERENCES Curso (CursoId);
+
+# ENTIDADE CURSO
+
+CREATE TABLE Curso (
+    Semestre SMALLINT,
+    Nome VARCHAR,
+    CursoId INTEGER PRIMARY KEY UNIQUE DEFAULT NEXTVAL('auto_increment_curso')
+);
+
+
+# ENTIDADE ENDERECO:
+
+CREATE TABLE Endereco (
+    EnderecoId INTEGER UNIQUE DEFAULT NEXTVAL('auto_increment_endereco'),
+    Rua VARCHAR,
+    Numero INTEGER,
+    Bairro VARCHAR,
+    Cidade VARCHAR,
+    Estado VARCHAR,
+    Outros VARCHAR,
+    AlunoId INTEGER
+);
+ 
+ALTER TABLE Endereco ADD CONSTRAINT FK_Endereco_1
+    FOREIGN KEY (AlunoId)
+    REFERENCES Aluno (AlunoId);
+
