@@ -1,0 +1,11 @@
+SELECT 
+c.Nome,
+c.Semestre,
+p.Nome,
+p.Graduacao,
+p.Fone
+FROM curso c
+INNER JOIN disciplina d
+ON c.CursoId = d.CursoId
+INNER JOIN professor p
+ON p.professorId = d.ProfessorId;
