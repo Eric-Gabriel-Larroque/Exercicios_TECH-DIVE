@@ -1,0 +1,4 @@
+SELECT * FROM aluno al
+LEFT JOIN endereco en
+ON al.AlunoId = en.AlunoId
+ORDER BY al.Nome;
