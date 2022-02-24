@@ -1,3 +1,5 @@
 # Exercícios da Semana 2:
 
-> Nenhum Exercício foi atribuído nesta semana.
+> Semana focada na instalação (se necessário) e aprendizado sobre *bash*
+
+
