@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="images.css">
+    <title>Imagens</title>
+</head>
+<body>
+    <audio src="spring.mp3"  loop></audio>
+
+
+    <picture>
+        <div id="moldura_noite_estrelada">
+            <a href="https://pt.wikipedia.org/wiki/A_Noite_Estrelada">
+                <img id="noite_estrelada"src="img_local.jpg" alt="local img">
+            </a>
+        </div>
+        <div id="moldura_ultima_ceia">
+            <a href="https://pt.wikipedia.org/wiki/%C3%9Altima_Ceia">
+                <img id="ultima_ceia" src="img/diretory_img.jpg" alt="diretory image">
+            </a>
+        </div>
+        <div id="moldura_mona_lisa">
+            <a href="https://pt.wikipedia.org/wiki/Mona_Lisa">
+                <img id="mona_lisa" 
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Leonardo_da_Vinci_-_Mona_Lisa.jpg/1200px-Leonardo_da_Vinci_-_Mona_Lisa.jpg"
+                    alt="browser image">
+            </a>
+            </div>
+    </picture>
+
+    <script>
+        let audio = document.querySelector('audio')
+        document.addEventListener('click',() => {
+            audio.play()
+        })
+    </script>
+</body>
+</html>
