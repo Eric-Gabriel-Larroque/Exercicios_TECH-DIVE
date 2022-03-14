@@ -2,6 +2,8 @@ package mercado.models.entitys;
 
 import java.util.LinkedHashSet;
 
+import static mercado.util.Validacao.*;
+
 public class Produto {
 
     private int id;
@@ -11,14 +13,20 @@ public class Produto {
     private Marca marca;
     private LinkedHashSet<Produto> listaProdutos = new LinkedHashSet<>();
 
-    public Produto(String nomeProduto, double preco, int id){
+    public Produto(String nomeProduto, double preco, int id, Classificacao classificacao, Marca marca){
         this.nomeProduto = nomeProduto;
         this.preco = preco;
         this.id = id;
+        this.classificacao = classificacao;
+        this.marca = marca;
         listaProdutos.add(this);
     }
 
-    public Produto(){}
+    public Produto(){
+        setNomeProduto();
+        setPreco();
+        listaProdutos.add(this);
+    }
 
     public int getId() {
         return id;
@@ -32,16 +40,16 @@ public class Produto {
         return nomeProduto;
     }
 
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
+    public void setNomeProduto() {
+        this.nomeProduto = validaString("Insira um nome\n--> ");
     }
 
     public double getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setPreco() {
+        this.preco = validaDouble("Insira um preço\n--> ");
     }
 
     public Classificacao getClassificacao() {
