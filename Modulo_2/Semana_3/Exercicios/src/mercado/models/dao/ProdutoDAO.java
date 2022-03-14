@@ -1,6 +1,6 @@
 package mercado.models.dao;
 
-import mercado.connection.JdbcConnection;
+import static mercado.util.Validacao.*;
 import mercado.models.entitys.Classificacao;
 import mercado.models.entitys.Marca;
 import mercado.models.entitys.Produto;
@@ -18,12 +18,17 @@ public class ProdutoDAO {
         this.conn = conn;
     }
 
-    public void criar() {
-        String sql = "INSERT INTO produto VALUES(DEFAULT, ?, ?, ?, ?)";
+    public void criar(Produto produto) {
+        String sql = "INSERT INTO produto VALUES(DEFAULT, 1, 1, ?, ?)";
         try(PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(1,produto.getNomeProduto());
+            preparedStatement.setDouble(2,produto.getPreco());
+            preparedStatement.execute();
+
+            System.out.println("Criação de registro na tabela realizada com sucesso!");
+
         }catch (SQLException e) {
-            System.err.println("Não fois possível inserir registros na tabela. Erro: "+e.getMessage());
-            e.printStackTrace();
+            System.err.println("Não foi possível inserir registros na tabela. Erro: "+e.getMessage());
         }
     }
 
@@ -36,10 +41,10 @@ public class ProdutoDAO {
                Produto produto = new Produto(
                     resultSet.getString("nome_produto"),
                     resultSet.getDouble("preco"),
-                    resultSet.getInt("ID")
+                    resultSet.getInt("ID"),
+                    new Classificacao(resultSet.getString("marca"),resultSet.getInt("ID")),
+                    new Marca(resultSet.getString("classificacao"),resultSet.getInt("ID"))
                );
-               produto.setMarca(new Marca(resultSet.getString("marca"),resultSet.getInt("ID")));
-               produto.setClassificacao(new Classificacao(resultSet.getString("classificacao"),resultSet.getInt("ID")));
 
                System.out.println("Produto = { "+produto.getNomeProduto()+" }, Preço = { "+produto.getPreco()+" }, " +
                        "Classificação = { "+produto.getClassificacao().getNomeClassificacao()+" }, " +
@@ -47,7 +52,6 @@ public class ProdutoDAO {
            }
         }catch (SQLException e) {
             System.err.println("Não foi possível listar os produtos. Erro: "+e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -66,11 +70,85 @@ public class ProdutoDAO {
                 int marca_id = resultSet.getInt("marca_id");
 
                 System.out.println("Nome={ "+nome+" }, Preço={ "+preco+"}, ID={ "+id+" }, " +
-                        "Classificacao_ID={ "+classificacao_id+" }, Marca_ID={ "+marca_id+"} ");
+                        "Classificacao_ID={ "+classificacao_id+" }, Marca_ID={ "+marca_id+" }");
             }
         }catch (SQLException e) {
             System.err.println("Não foi possível listar os produtos. Erro: "+e.getMessage());
-            e.printStackTrace();
+        }
+    }
+
+    public void listaPeloId(int id) {
+        String sql = "SELECT * FROM PRODUTO WHERE id= ?";
+        try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+            preparedStatement.setInt(1,id);
+            preparedStatement.execute();
+
+            ResultSet resultSet = preparedStatement.getResultSet();
+            resultSet.next();
+
+                System.out.println("Produto_ID={ "+resultSet.getInt("id")+" }, Marca_ID={ "+resultSet.getInt("marca_id")+" }, " +
+                        "Classificacao_ID={ "+resultSet.getInt("classificacao_id")+" }, Nome={ "+resultSet.getString("nome")+" }, " +
+                        "Preço={ "+resultSet.getDouble("preco")+" }");
+
+        }catch (SQLException e){
+            System.err.println("Não foi possível listar o produto pelo id. Erro: "+e.getMessage());
+        }
+    }
+
+    public void listaPeloNome(String nome) {
+        String sql = "SELECT * from produto WHERE nome = ?";
+
+        try(PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(1,nome);
+            preparedStatement.execute();
+
+            ResultSet resultSet = preparedStatement.getResultSet();
+            resultSet.next();
+                System.out.println("Produto_ID={ "+resultSet.getInt("id")+" }, Marca_ID={ "+resultSet.getInt("marca_id")+" }, " +
+                        "Classificacao_ID={ "+resultSet.getInt("classificacao_id")+" }, Nome={ "+resultSet.getString("nome")+" }, " +
+                        "Preço={ "+resultSet.getDouble("preco")+" }");
+
+        }catch (SQLException e) {
+            System.err.println("Nome não encontrado na tabela.");
+        }
+    }
+
+    public void atualizar(int resgitroEscolhido) {
+        String[] dadosAtualizaveis = {"nome","preco"};
+
+        String sql = "UPDATE produto SET "+dadosAtualizaveis[resgitroEscolhido]+" = ? WHERE id = ?";
+
+        try(PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(2,"PS4");
+            preparedStatement.setString(3,"id");
+            preparedStatement.setInt(4,1);
+            preparedStatement.execute();
+            System.out.println("Atualização realizada com sucesso!");
+        }catch (SQLException e) {
+            System.err.println("Não foi possível atualizar a tabela. Erro: "+e.getMessage());
+        }
+    }
+
+    public void deletar(int id) {
+        String sql = "DELETE from produto WHERE id = ?";
+
+        try(PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1,id);
+            preparedStatement.execute();
+            System.out.println("Deleção do produto realizada com sucesso!");
+        }catch (SQLException e) {
+            System.err.println("Não foi possível realizar a deleção do produto. Erro: "+e.getMessage());
+        }
+    }
+
+    public void operacoes(int operacao) {
+        switch (operacao){
+            case 0 -> listar();
+            case 1 -> listarCategoriaMarca();
+            case 2 -> listaPeloNome(validaString("Insira um nome\n--> "));
+            case 3 -> listaPeloId(validaNumeros("Insira um ID contido na tabela\n--> "));
+            case 4 -> criar(new Produto());
+            case 5 -> deletar(validaNumeros("Insira o ID do produto que você quer deletar\n--> "));
         }
     }
 
