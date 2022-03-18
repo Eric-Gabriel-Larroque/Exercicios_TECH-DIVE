@@ -1,16 +1,17 @@
 package market2.model.dao;
 
-import javax.persistence.EntityManager;
-
 import market2.model.persistence.Category;
+import market2.model.persistence.Client;
 
+import javax.persistence.EntityManager;
+import javax.print.DocFlavor;
 import java.util.List;
 
-public class CategoryDAO {
+public class ClientDAO {
 
     private EntityManager em;
 
-    public CategoryDAO(EntityManager em) {
+    public ClientDAO(EntityManager em) {
         this.em = em;
     }
 
@@ -26,26 +27,28 @@ public class CategoryDAO {
         convertToMerge(category);
     }
 
-    public List<Category> listAll() {
-        String jpql = "SELECT c FROM Category AS c";
+    public List<Client> listAll() {
+        String jpql = "SELECT c FROM Client AS c";
+
         return this.em
-                .createQuery(jpql,Category.class)
+                .createQuery(jpql,Client.class)
                 .getResultList();
     }
 
-    public List<Category> listByName(String name) {
-        String jpql = "SELECT c FROM Category AS c WHERE name =:name";
-        return this.em
-                .createQuery(jpql,Category.class)
+    public List<Client> listByName(String name) {
+        String jpql = "SELECT c FROM Client AS c WHERE name =:name";
+
+        return  this.em.
+                createQuery(jpql,Client.class)
                 .setParameter("name",name)
                 .getResultList();
     }
 
-    public Category findByName(String name) {
-        String jpql = "SELECT c FROM Category AS c WHERE c.name =:name";
+    public Client findByName(String name) {
+        String jpql = "SELECT c FROM Client AS c WHERE name =:name";
 
-        return this.em.
-                createQuery(jpql, Category.class)
+        return this.em
+                .createQuery(jpql,Client.class)
                 .setParameter("name",name)
                 .getSingleResult();
     }
