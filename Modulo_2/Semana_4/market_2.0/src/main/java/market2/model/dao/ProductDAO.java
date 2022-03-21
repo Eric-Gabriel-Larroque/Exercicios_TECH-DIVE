@@ -3,6 +3,8 @@ package market2.model.dao;
 import market2.model.persistence.Product;
 
 import javax.persistence.EntityManager;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.List;
 
 public class ProductDAO {

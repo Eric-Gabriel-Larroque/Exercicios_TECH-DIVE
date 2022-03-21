@@ -1,11 +1,8 @@
 package market2.model.dao;
 
-import market2.model.persistence.Category;
-import market2.model.persistence.Client;
-
 import javax.persistence.EntityManager;
-import javax.print.DocFlavor;
 import java.util.List;
+import market2.model.persistence.Client;
 
 public class ClientDAO {
 
@@ -15,16 +12,16 @@ public class ClientDAO {
         this.em = em;
     }
 
-    public void create(Category category) {
-        this.em.persist(category);
+    public void create(Client client) {
+        this.em.persist(client);
     }
 
-    public void delete(Category category) {
-        this.em.remove(convertToMerge(category));
+    public void delete(Client client) {
+        this.em.remove(convertToMerge(client));
     }
 
-    public void update(Category category) {
-        convertToMerge(category);
+    public void update(Client client) {
+        convertToMerge(client);
     }
 
     public List<Client> listAll() {
@@ -44,21 +41,21 @@ public class ClientDAO {
                 .getResultList();
     }
 
-    public Client findByName(String name) {
-        String jpql = "SELECT c FROM Client AS c WHERE name =:name";
+    public Client findByCPF(String cpf) {
+        String jpql = "SELECT c FROM Client AS c WHERE cpf =:cpf";
 
         return this.em
                 .createQuery(jpql,Client.class)
-                .setParameter("name",name)
+                .setParameter("cpf",cpf)
                 .getSingleResult();
     }
 
-    public Category getById(Long id) {
-        return this.em.find(Category.class,id);
+    public Client getById(Long id) {
+        return this.em.find(Client.class,id);
     }
 
-    public Category convertToMerge(Category category) {
-        return this.em.merge(category);
+    public Client convertToMerge(Client client) {
+        return this.em.merge(client);
     }
 
 }
