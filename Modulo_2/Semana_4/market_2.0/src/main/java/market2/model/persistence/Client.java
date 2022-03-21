@@ -3,6 +3,9 @@ package market2.model.persistence;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Entity
 public class Client {
@@ -14,18 +17,18 @@ public class Client {
     @Column(nullable = false, length = 64)
     private String name;
 
-    @Column(nullable = false, length = 11)
-    private String CPF;
+    @Column(nullable = false, length = 11, unique = true)
+    private String cpf;
 
     @Column(nullable = false)
     private LocalDate birthDate;
 
     public Client() {}
 
-    public Client(String name, String CPF, LocalDate birthDate) {
-        this.name = name;
-        this.CPF = CPF;
-        this.birthDate = birthDate;
+    public Client(String name, String cpf, String birthDate) {
+        this.name = name.toLowerCase();
+        this.cpf = cpf;
+        this.birthDate = LocalDate.parse(birthDate,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public long getId() {
@@ -41,15 +44,15 @@ public class Client {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     public String getCPF() {
-        return CPF;
+        return cpf;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCPF(String cpf) {
+        this.cpf = cpf;
     }
 
     public LocalDate getBirthDate() {
@@ -65,7 +68,7 @@ public class Client {
         return "Client{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", CPF='" + CPF + '\'' +
+                ", CPF='" + cpf + '\'' +
                 ", birthDate=" + birthDate +
                 '}';
     }

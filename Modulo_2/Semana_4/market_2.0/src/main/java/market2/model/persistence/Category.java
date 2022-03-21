@@ -1,23 +1,21 @@
 package market2.model.persistence;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false,unique = true)
     private String name;
 
-    public Category() {}
+    public Category(){}
 
     public Category(String name) {
-        this.name = name.toLowerCase();
+        this.name = name.toString();
     }
 
     public long getId() {
@@ -33,7 +31,7 @@ public class Category {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toString();
     }
 
     @Override
@@ -43,5 +41,4 @@ public class Category {
                 ", name='" + name + '\'' +
                 '}';
     }
-
 }
