@@ -1,11 +1,8 @@
 package market2.model.persistence;
 
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 @Entity
 public class Client {
