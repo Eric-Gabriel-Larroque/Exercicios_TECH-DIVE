@@ -15,4 +15,8 @@ public class CursoService {
     }
 
     // Crie os métodos aqui!
+
+    public Curso criarCurso(Curso curso) {
+        return cursoDao.criarCurso(curso);
+    }
 }
