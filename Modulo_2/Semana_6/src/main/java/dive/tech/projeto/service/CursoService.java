@@ -20,6 +20,11 @@ public class CursoService {
         return cursoDao.obterCursoPeloId(id);
     }
 
+    public Curso obterCursoPeloNome(String nome) {
+        return cursoDao.obterCursoPeloNome(nome);
+    }
+
+
     public Curso criarCurso(Curso curso) {
         return cursoDao.criarCurso(curso);
     }

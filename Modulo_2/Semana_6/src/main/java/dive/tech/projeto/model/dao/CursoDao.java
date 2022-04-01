@@ -2,6 +2,7 @@ package dive.tech.projeto.model.dao;
 
 import dive.tech.projeto.model.entity.Curso;
 import dive.tech.projeto.model.entity.Disciplina;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +109,19 @@ public class CursoDao {
             }
         }
         return cursoSelecionado;
+    }
+
+    public Curso obterCursoPeloNome(String nome) {
+
+        Curso cursoFiltrado = null;
+
+        for(Curso curso: cursos) {
+            if(curso.getNome().equalsIgnoreCase(nome)) {
+                cursoFiltrado = curso;
+            }
+        }
+
+        return cursoFiltrado;
     }
 
     public Curso criarCurso(Curso curso) {

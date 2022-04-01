@@ -54,6 +54,33 @@ public class CursoController {
         }
     }
 
+    @GET
+    @Path("/filtro")
+    @Produces("application/json")
+    public Response obterCursoPeloNome(@QueryParam("nome") String nome) {
+
+        Curso cursoSelecionado = cursoService.obterCursoPeloNome(nome);
+
+        if(cursoSelecionado==null) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .build();
+        }
+
+        try {
+            return Response
+                    .ok(cursoSelecionado)
+                    .build();
+        }catch (Exception e) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
+        }
+    }
+
+
+
     @POST
     @Consumes("application/json")
     @Produces("application/json")
