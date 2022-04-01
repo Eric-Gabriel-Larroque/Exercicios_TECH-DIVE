@@ -1,5 +1,8 @@
 package dive.tech.projeto.model.entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class Disciplina implements Serializable{
@@ -13,6 +16,9 @@ public class Disciplina implements Serializable{
 
     private Long id;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
     private String nome;
 
     public Disciplina(String nomeCurso, int i) {
@@ -36,4 +42,11 @@ public class Disciplina implements Serializable{
         this.nome = nome;
     }
 
+    @Override
+    public String toString() {
+        return "Disciplina{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
+    }
 }

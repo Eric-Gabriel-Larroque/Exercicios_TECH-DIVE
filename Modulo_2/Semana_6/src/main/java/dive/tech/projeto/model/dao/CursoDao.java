@@ -77,17 +77,37 @@ public class CursoDao {
      */
     public List<Curso> obterCursos() {
 
-        for (int i = 1; i < 4; i++) {
-            Curso curso = new Curso(i);
+        if(cursos.size()==0) {
+            for (int i = 1; i < 4; i++) {
+                long listaCursoSize =  cursos.size()==0?0L:cursos.size();
 
-            for (int j = 1; j < 4; j++) {
-                Disciplina disciplina = new Disciplina(curso.getNome(), j);
-                curso.getDisciplinas().add(disciplina);
+                Curso curso = new Curso(i);
+
+                for (int j = 1; j < 4; j++) {
+
+                    long listaDisciplinaSize = disciplinas.size()==0?0L:disciplinas.size();
+                    Disciplina disciplina = new Disciplina(curso.getNome(), j);
+                    curso.getDisciplinas().add(disciplina);
+                    disciplina.setId(listaDisciplinaSize+1);
+                    disciplinas.add(disciplina);
+                }
+
+                curso.setId(listaCursoSize+1);
+                cursos.add(curso);
             }
-
-            cursos.add(curso);
         }
         return cursos;
+    }
+
+    public Curso obterCursoPeloId(Long id) {
+        Curso cursoSelecionado = null;
+
+        for(Curso curso: cursos) {
+            if(curso.getId().equals(id)) {
+                cursoSelecionado = curso;
+            }
+        }
+        return cursoSelecionado;
     }
 
     public Curso criarCurso(Curso curso) {
@@ -105,5 +125,26 @@ public class CursoDao {
         curso.setDisciplinas(curso.getDisciplinas());
         cursos.add(curso);
         return curso;
+    }
+
+    public Curso atualizarCurso(Curso curso) {
+            for(Curso curso1: cursos) {
+                if(curso1.getId().equals(curso.getId())) {
+                    curso.setDisciplinas(curso1.getDisciplinas());
+                    curso1.setNome(curso.getNome());
+                }
+            }
+            return curso;
+    }
+
+    public List<Curso> deletarCurso(Long id) {
+
+        for (Curso curso: cursos) {
+            if(curso.getId().equals(id)){
+                cursos.remove(curso);
+            }
+        }
+
+        return cursos;
     }
 }

@@ -16,7 +16,19 @@ public class CursoService {
 
     // Crie os métodos aqui!
 
+    public Curso obterCursoPeloId(Long id) {
+        return cursoDao.obterCursoPeloId(id);
+    }
+
     public Curso criarCurso(Curso curso) {
         return cursoDao.criarCurso(curso);
+    }
+
+    public Curso atualizarCurso(Curso curso) {
+        return cursoDao.atualizarCurso(curso);
+    }
+
+    public List<Curso> deletarCurso(Long id) {
+        return cursoDao.deletarCurso(id);
     }
 }

@@ -1,5 +1,9 @@
 package dive.tech.projeto.model.entity;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +20,19 @@ public class Curso {
 
     private Long id;
 
+    @NotNull
+    @NotBlank
+    @NotEmpty
     private String nome;
 
-    private List<Disciplina> disciplinas = new ArrayList<>();
+    private List<@Valid Disciplina> disciplinas = new ArrayList<>();
 
     public Curso(int i) {
         this.id = (long) i;
         this.nome = "Curso " + i;
     }
+
+    public Curso(){}
 
     public Long getId() {
         return id;
@@ -49,4 +58,12 @@ public class Curso {
         this.disciplinas = disciplinas;
     }
 
+    @Override
+    public String toString() {
+        return "Curso{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", disciplinas=" + disciplinas +
+                '}';
+    }
 }
