@@ -84,7 +84,14 @@ public class CursoController {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public Response criarCurso(Curso curso) {
+    public Response criarCurso(Curso curso,
+                               @HeaderParam("Authorization") String authorization) {
+
+        if("senha123".equalsIgnoreCase(authorization)) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .build();
+        }
 
         try {
             Curso cursoCriado = cursoService.criarCurso(curso);
