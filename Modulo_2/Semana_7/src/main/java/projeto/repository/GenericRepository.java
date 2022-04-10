@@ -1,9 +1,11 @@
 package projeto.repository;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.io.Serializable;
 
+@ApplicationScoped
 public class GenericRepository implements Serializable {
 
     @Inject

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Role {
 
-    private static final String ADMIN = "ADMIN";
+    public static final String ADMIN = "ADMIN";
 
     @Id
     @GeneratedValue
