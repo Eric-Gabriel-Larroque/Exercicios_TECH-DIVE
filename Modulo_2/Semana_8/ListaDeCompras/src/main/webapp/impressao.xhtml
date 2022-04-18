@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+    <link rel="stylesheet" href="resources/css/styles.css"/>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Lista de Compras</title>
+        <h:outputStylesheet name="css/styles.css" />
+        <h:outputStylesheet library="webjars" name="primeflex/2.0.0/primeflex.min.css" />
+    </h:head>
+    <h:body styleClass="p-d-flex p-ai-center p-jc-center">
+
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{listaBean.init()}" />
+        </f:metadata>
+
+
+        <p:dataTable id="tb-itens"
+                     value="#{listaBean.listaItens}"
+                     var="item"
+                     emptyMessage="Sem registros de item.">
+            <p:column headerText="Qntd">
+                <h:outputText value="#{item.quantidade}" />
+            </p:column>
+            <p:column headerText="Medida">
+                <h:outputText value="#{item.medida}" />
+            </p:column>
+            <p:column headerText="Nome">
+                <h:outputText value="#{item.nome}" />
+            </p:column>
+        </p:dataTable>
+        <p:linkButton value="Voltar À Lista" outcome="lista" styleClass="btn-link" />
+    </h:body>
+</html>
