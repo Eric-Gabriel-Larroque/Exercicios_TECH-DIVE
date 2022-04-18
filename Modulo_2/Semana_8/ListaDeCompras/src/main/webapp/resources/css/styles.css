@@ -80,3 +80,7 @@ select {
     text-decoration: none;
     font-weight: bold;
 }
+
+.tb {
+    width: 80%;
+}

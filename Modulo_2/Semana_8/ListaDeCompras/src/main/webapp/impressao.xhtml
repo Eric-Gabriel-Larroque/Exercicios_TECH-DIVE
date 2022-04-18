@@ -24,7 +24,9 @@
         <p:dataTable id="tb-itens"
                      value="#{listaBean.listaItens}"
                      var="item"
-                     emptyMessage="Sem registros de item.">
+                     emptyMessage="Sem registros de item."
+                     styleClass="tb"
+        >
             <p:column headerText="Qntd">
                 <h:outputText value="#{item.quantidade}" />
             </p:column>
@@ -35,6 +37,6 @@
                 <h:outputText value="#{item.nome}" />
             </p:column>
         </p:dataTable>
-        <p:linkButton value="Voltar À Lista" outcome="lista" styleClass="btn-link" />
+        <p:linkButton value="Voltar À Lista" outcome="lista" styleClass="btn-link" style="margin-top: 20px" />
     </h:body>
 </html>
