@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<link rel="stylesheet" href="resources/css/styles.css"/>
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Lista de Compras</title>
+    <h:outputStylesheet name="css/styles.css" />
+    <h:outputStylesheet library="webjars" name="primeflex/2.0.0/primeflex.min.css" />
+</h:head>
+<h:body styleClass="p-d-flex p-ai-center p-jc-center">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{listaBean.init()}" />
+    </f:metadata>
+
+    <div class="p-jc-center">
+        <span class="titulo">Lista de Compras</span>
+    </div>
+    <h:form id="form-cadastro-produto" styleClass="p-flex-column">
+
+        <p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
+            <h:outputLabel style="margin-left: 70px" value="Quantidade: " for="quantidade" />
+            <p:inputNumber id="quantidade"
+                           size="5"
+                           maxValue="99"
+                           minValue="0"
+                           maxlength="4"
+                           decimalPlaces="1"
+                           value="#{listaBean.item.quantidade}"
+                           required="true"
+                           requiredMessage="Quantidade do item não informado."
+                           converter="javax.faces.Float"
+                           emptyValue="#{null}"
+                           styleClass="ui-inputnumber"
+            >
+                <p:message for="quantidade" style="font-size: 0.8rem" />
+                <f:validator validatorId="QuantidadeValidator"/>
+                <f:attribute name="quantidade" value="Quantidade de itens" />
+            </p:inputNumber>
+
+            <p:selectOneMenu style="width: 150px"
+                             value="#{listaBean.item.medida}"
+                             required="true"
+                             requiredMessage="Medida do item não informada"
+                             id="lista-medidas"
+            >
+                <p:message for="lista-medidas" style="font-size: .8rem"/>
+                <f:validator validatorId="StringValidator"/>
+                <f:attribute name="stringAttr" value="Medida do Item" />
+
+
+                <f:selectItem itemValue="#{null}"
+                              itemLabel="-- selecione --"
+                />
+                <f:selectItems
+                        value="#{listaBean.medidas}"
+                        var="medida"
+                        itemValue="#{medida}"
+                        itemLabel="#{medida}"
+                />
+            </p:selectOneMenu>
+        </p:panelGrid>
+
+        <p:panelGrid columns="3" id="panel-items" styleClass="ui-panelgrid-blank">
+            <h:outputLabel value="Item: " for="add-item"/>
+            <p:inputText maxlength="30"
+                         styleClass="add-item"
+                         value="#{listaBean.item.nome}"
+                         id="add-item"
+                         required="true"
+                         requiredMessage="Nome do item não informado."
+            >
+                <p:message for="add-item" style="font-size: 0.8rem" />
+                <f:validator validatorId="StringValidator"/>
+                <f:attribute name="stringAttr" value="Nome do Item" />
+            </p:inputText>
+
+            <p:commandButton
+
+                    styleClass="btn-add btn-submit"
+                    id="adicionar"
+                    value="+"
+                    action="#{listaBean.adicionar}"
+                    update="form-remover-produto"
+                   />
+        </p:panelGrid>
+    </h:form >
+    <h:form id="form-remover-produto" styleClass="p-d-flex p-jc-center" >
+        <h:selectManyListbox id="itens-cadastrados"
+                             style="width: 370px"
+                             required="true"
+                             value="#{listaBean.itensSelecionados}"
+        >
+            <f:selectItems value="#{listaBean.listaItens}"
+                           var="item"
+                           itemValue="#{item}"
+                           itemLabel="#{item}"
+            />
+        </h:selectManyListbox>
+        <p:commandButton
+                disabled="#{listaBean.listaItens.size()==0}"
+                styleClass="btn-submit btn-remove"
+                id="remover"
+                value="-"
+                action="#{listaBean.removerItens()}"
+                update="form-remover-produto"
+               />
+    </h:form>
+    <p:linkButton value="Página de Impressão" outcome="impressao" styleClass="btn-link" />
+</h:body>
+</html>
