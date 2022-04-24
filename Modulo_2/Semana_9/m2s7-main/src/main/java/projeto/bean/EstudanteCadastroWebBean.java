@@ -56,6 +56,8 @@ public class EstudanteCadastroWebBean implements Serializable {
 
     public void cadastrar() {
         try {
+            enderecoService.cadastrar(enderecoDTO);
+            estudanteDTO.setIdEndereco(enderecoDTO.getIdEndereco());
             estudanteService.cadastrar(estudanteDTO);
             if (idEstudante == null) {
                 MessageUtils.returnGlobalMessageOnSuccess("Salvo com sucesso!");

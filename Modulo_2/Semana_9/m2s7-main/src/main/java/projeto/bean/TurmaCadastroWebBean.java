@@ -3,6 +3,7 @@ package projeto.bean;
 import org.omnifaces.cdi.Param;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
+import projeto.dto.EscolaDTO;
 import projeto.dto.EstudanteDTO;
 import projeto.dto.TurmaDTO;
 import projeto.exception.BusinessException;
@@ -32,6 +33,8 @@ public class TurmaCadastroWebBean implements Serializable {
     private TurmaDTO turmaDTO = new TurmaDTO();
 
     private EstudanteDTO estudanteSelecionado;
+
+    private List<EscolaDTO> escolas;
 
     private List<EstudanteDTO> estudantesSemTurmas = new ArrayList<>();
 
@@ -101,5 +104,13 @@ public class TurmaCadastroWebBean implements Serializable {
 
     public void setEstudantesSemTurmas(List<EstudanteDTO> estudantesSemTurmas) {
         this.estudantesSemTurmas = estudantesSemTurmas;
+    }
+
+    public List<EscolaDTO> getEscolas() {
+        return escolas;
+    }
+
+    public void setEscolas(List<EscolaDTO> escolas) {
+        this.escolas = escolas;
     }
 }
