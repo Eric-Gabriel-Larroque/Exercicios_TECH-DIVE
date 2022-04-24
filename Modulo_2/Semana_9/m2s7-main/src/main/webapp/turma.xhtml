@@ -54,6 +54,21 @@
                     </div>
 
                     <div class="col-12">
+                        <div class="col-2">
+                            <p:selectOneMenu id="escola"
+                                             valueChangeListener="#{escolaCadastroWebBean.cadastrar()}"
+                                             value="#{turmaCadastroWebBean.turmaDTO.idEscola}">
+                                <f:selectItem itemLabel="Selecione" itemValue="#{null}"/>
+                                <f:selectItems value="#{turmaCadastroWebBean.escolas}"
+                                               var="escola"
+                                               itemLabel="#{escola.nome}"
+                                               itemValue="#{escola.idEscola}"
+                                />
+                            </p:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
                         <div class="col-3 m-1">
                             <p:commandButton id="botaoCadastrar"
                                              process="@form"
