@@ -19,7 +19,7 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
 
 
-    private void cadastrar(EnderecoDTO enderecoDTO) throws BusinessException {
+    public void cadastrar(EnderecoDTO enderecoDTO) throws BusinessException {
         enderecoBusiness.cadastrar(enderecoDTO);
     }
 }
