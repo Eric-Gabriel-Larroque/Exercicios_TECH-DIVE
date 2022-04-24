@@ -1,11 +1,6 @@
 package projeto.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -22,6 +17,10 @@ public class Estudante {
     private String email;
 
     private Date dataNascimento;
+
+    @ManyToOne
+    @JoinColumn(name = "id_endereco", nullable = false)
+    private Endereco endereco;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Turma turma;
@@ -64,5 +63,13 @@ public class Estudante {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
