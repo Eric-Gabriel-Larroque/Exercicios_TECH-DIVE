@@ -13,6 +13,8 @@ public class EstudanteDTO implements Serializable {
 
     private Long idTurma;
 
+    private Long idEndereco;
+
     private String nome;
 
     private String email;
@@ -30,6 +32,7 @@ public class EstudanteDTO implements Serializable {
     public EstudanteDTO(Estudante estudante) {
         this.idEstudante = estudante.getIdEstudante();
         this.idTurma = estudante.getTurma() != null ? estudante.getTurma().getIdTurma() : null;
+        this.idEndereco = estudante.getEndereco() != null ? estudante.getEndereco().getIdEndereco() : null;
         this.nome = estudante.getNome();
         this.email = estudante.getEmail();
         this.dataNascimento = estudante.getDataNascimento();
@@ -73,5 +76,13 @@ public class EstudanteDTO implements Serializable {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public Long getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(Long idEndereco) {
+        this.idEndereco = idEndereco;
     }
 }
