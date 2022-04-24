@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 import projeto.dto.EstudanteDTO;
 import projeto.dto.FiltroTurmaDTO;
 import projeto.dto.TurmaDTO;
+import projeto.entity.Endereco;
+import projeto.entity.Escola;
 import projeto.entity.Estudante;
 import projeto.entity.Turma;
 import projeto.exception.BusinessException;
@@ -37,6 +39,14 @@ public class TurmaBusiness {
         turma.setNome(turmaDTO.getNome());
         turma.setDataInicio(turmaDTO.getDataInicio());
         turma.setDataTermino(turmaDTO.getDataTermino());
+
+        Escola escola = turmaRepository.find(Escola.class, turmaDTO.getIdEscola());
+
+        if (escola == null) {
+            throw new BusinessException("Escola não encontrada");
+        }
+
+        turma.setEscola(escola);
 
         for (Estudante estudante : turma.getEstudantes()) {
             if (turmaDTO.getEstudantes()
@@ -79,6 +89,10 @@ public class TurmaBusiness {
 
         if (turmaDTO.getDataTermino() == null) {
             erros.add("A data de término da turma é inválida.");
+        }
+
+        if (turmaDTO.getIdEscola() == null) {
+            erros.add("o valor da Escola é inválido.");
         }
 
         if (!erros.isEmpty()) {
