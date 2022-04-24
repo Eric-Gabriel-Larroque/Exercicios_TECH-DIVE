@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:fieldset legend="Endereco" style="width: 20%">
+        <div class="col-2">
+            <p:outputLabel for="numeroEndereco" value="Número: " />
+            <p:inputText id="numeroEndereco" value="#{estudanteCadastroWebBean.enderecoDTO.numero}" />
+        </div>
+        <div class="col-2">
+            <p:outputLabel for="ruaEndereco" value="Rua: " />
+            <p:inputText id="ruaEndereco" value="#{estudanteCadastroWebBean.enderecoDTO.rua}" />
+        </div>
+        <div class="col-2">
+            <p:outputLabel for="bairroEndereco" value="Bairro: " />
+            <p:inputText id="bairroEndereco" value="#{estudanteCadastroWebBean.enderecoDTO.bairro}" />
+        </div>
+        <div class="col-2">
+            <p:outputLabel for="cidadeEndereco" value="Cidade: " />
+            <p:inputText id="cidadeEndereco" value="#{estudanteCadastroWebBean.enderecoDTO.cidade}" />
+        </div>
+        <div class="col-2">
+            <p:outputLabel for="estadoEndereco" value="Estado: " />
+            <p:inputText id="estadoEndereco" value="#{estudanteCadastroWebBean.enderecoDTO.estado}" />
+        </div>
+        <div class="col-2">
+            <p:outputLabel for="paisEndereco" value="País: " />
+            <p:inputText id="paisEndereco" value="#{estudanteCadastroWebBean.enderecoDTO.pais}" />
+        </div>
+    </p:fieldset>
+</ui:composition>
