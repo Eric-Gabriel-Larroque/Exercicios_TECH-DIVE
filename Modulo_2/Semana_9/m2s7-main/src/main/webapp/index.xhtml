@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en"
+      lang="en">
+
+<h:head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.0/primeflex.css"/>
+</h:head>
+
+<h:body style="margin: 0 !important;">
+    <!--
+        Aqui temos uma tag interessante: Para reutilizar layouts, podemos incluir pedaços de xhtml dentro de outros xhtml.
+        No nosso caso, estamos incluindo tudo que existir dentro de "template/_navbar.xhtml", e na hora de renderizar
+        os elementos da nossa interface, o sistema simplesmente adiciona os elementos gerados desse pedaço de interface.
+    -->
+    <ui:include src="template/_navbar.xhtml"/>
+
+    <h:form id="home">
+        <p:messages id="messages" showDetail="true" showIcon="false" showSummary="false" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+
+        <div class="grid">
+            <div class="col-12">
+                <div class="col-2">
+                    <p:outputLabel for="campoDeTexto" value="Texto: "/>
+                    <h:inputText id="campoDeTexto"
+                                 rendered="#{homeWebBean.renderizarCampoDeTexto}"
+                                 disabled="#{homeWebBean.desabilitarCampoDeTexto()}"
+                                 readonly="#{homeWebBean.apenasVisualizarCampoDeTexto}"
+                                 value="#{homeWebBean.texto}"/>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="col-2">
+                    <p:outputLabel for="data" value="Data:"/>
+                    <p:calendar id="data"
+                                value="#{homeWebBean.data}"
+                                locale="br"
+                                pattern="dd/MM/yyyy - HH:mm:ss"
+                                required="true"
+                                requiredMessage="A data é obrigatória"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col-12">
+                <div class="col-6">
+                    <h:outputText id="textoAdmin"
+                                  value="Só apareço para admins!" rendered="#{homeWebBean.admin}"/>
+
+                    <h:outputText id="textoNaoAdmin"
+                                  value="Só apareço para quem não for admin!" rendered="#{!homeWebBean.admin}"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col-12">
+                <div class="col-3 m-1">
+                    <p:commandButton id="processarTudo"
+                                     process="@form"
+                                     value='Eu processo o form todo porque uso o process="@form"'
+                                     action="#{homeWebBean.mostrarCamposNaMensagem()}"/>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="col-3 m-1">
+                    <p:commandButton id="processarData"
+                                     process="@this"
+                                     value='Eu ignoro o formulário com o process="@this"'
+                                     action="#{homeWebBean.mostrarCamposNaMensagem()}"/>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="col-3 m-1">
+                    <!--
+                        Com o process="@this", estou dizendo que quero processar apenas o próprio componente, ou seja, o botão.
+                        Não quero processar os outros campos dentro do formulário, então consigo burlar a validação dos outros componentes.
+                        Com o update="data" estou dizendo que quero atualizar somente o campo "data" após a conclusão do request feito pelo JSF
+                        ao clicar no botão.
+                    -->
+                    <p:commandButton id="atualizarDataEMostrarEmTela"
+                                     process="@this"
+                                     update="data"
+                                     value="Eu insiro uma data via Java e mostro na tela"
+                                     action="#{homeWebBean.atualizarData()}"/>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="col-3 m-1">
+                    <p:commandButton id="atualizarDataENaoMostrarEmTela"
+                                     process="@this"
+                                     value="Eu insiro uma data via Java mas não atualizo o componente"
+                                     action="#{homeWebBean.atualizarData()}"/>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en"
+      lang="en">
+
+<!--
+    Esse é o cabeçalho da tela.
+    Ao entrar na tela, esse <h:head> é transformado em <head> e o sistema insere por baixo dos panos todos os scripts
+    necessários para a tela funcionar com JSF/PrimeFaces.
+    Exemplo:
+    <head id="j_idt2">
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/theme.css?ln=primefaces-arya&amp;v=11.0.0">
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/primeicons/primeicons.css?ln=primefaces&amp;v=11.0.0">
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/components.css?ln=primefaces&amp;v=11.0.0">
+        <script type="text/javascript">if(window.PrimeFaces)
+        {PrimeFaces.settings.locale='pt_BR';PrimeFaces.settings.viewId='/login.xhtml';PrimeFaces.settings.contextPath='';PrimeFaces.settings.cookiesSecure=false;PrimeFaces.settings.partialSubmit=true;}
+        </script>
+        <title>Login</title>
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.0/primeflex.css">
+    </head>
+-->
+<h:head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.0/primeflex.css"/>
+</h:head>
+
+
+<!--
+    O <h:body> é usado assim e não como um simples <body> para que o sistema insira possíveis recursos
+    que o desenvolvedor programou para aparecer, como imagens, scripts, CSS, etc.
+-->
+<h:body style="width: 100%; margin: 0; padding: 50px">
+
+    <!--
+        O JSF usa o <h:form> para enviar os requests para o back-end. Ele existe porque o JSF é focado em requests,
+        e toda a coleta de dados que o request enviará fica dentro do form.
+    -->
+    <h:form styleClass="flex text-center" style="justify-content: center; align-items: center">
+
+        <!--
+            Aqui temos um componente do PrimeFaces.
+            O <p:messages> serve para exibir mensagens na tela.
+            Essas mensagens podem ser adicionadas diretamente no nosso Java, ou aparecem quando alguma validação falha na tela
+            (um campo com required=true estando em branco, por exemplo).
+            O <p:autoUpdate> serve para configurar o <p:messages> como automático, ou seja,
+            não precisamos dizer "<p:messages, você tem uma nova mensagem para exibir. Atualize aí, por favor".
+            Ele atualizará a cada request feito pelo sistema, e se alguma mensagem estiver programada para ser exibida,
+            o <p:messages exibirá após o término do request.
+        -->
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+
+        <div class="card">
+            <div class="field">
+
+                <!--
+                    Aqui temos dois componentes JSF: um para gerar uma label comum e outro para gerar um <input>.
+                    Observe que temos algums atributos: "id", "value", "styleClass" e "required".
+                    O "id" serve para especificar o ID do elemento HTML quando o mesmo for gerado.
+                    O "value" serve para definirmos quem guardará o valor desse campo. No caso, estamos especificando
+                    a variável "email" dentro do objeto "login" que fica dentro do bean "loginWebBean".
+                    O sistema consegue alcançar essa variável através dos getters e setters que temos dentro dos objetos.
+                    Ou seja: loginWebBean possui um get/set para "login" e dentro de "LoginDTO" tem um get/set para "email".
+                -->
+                <h:outputLabel for="email">E-mail:</h:outputLabel>
+                <h:inputText id="email"
+                             value="#{loginWebBean.login.email}"
+                             styleClass="inputfield ml-1"
+                             required="true">
+                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
+                </h:inputText>
+            </div>
+
+            <div class="field">
+                <h:outputLabel for="senha">Senha:</h:outputLabel>
+                <h:inputSecret id="senha"
+                               value="#{loginWebBean.login.senha}"
+                               styleClass="inputfield ml-1"
+                               required="true"/>
+            </div>
+
+            <div class="field">
+                <!--
+                    Aqui temos um botão de comando. Se observamos o HTML gerado, veremos que o elemento gerado é um
+                    <input type="submit"> que serve para submeter formulários HTML.
+                    Ou seja: ao clicarmos, ele pegará por padrão os dados dentro do formulário (o <h:form>) e enviará
+                    em forma de request para o back-end (que o JSF configurou para nós por baixo dos panos).
+                    Aqui temos um atributo importante: o "action". Ele serve para chamar um método Java.
+                    Em resumo, ao clicar no botão, o sistema pegará o formulário (validando os campos e tudo mais) e
+                    chamará o método "login()" dentro de "loginWebBean".
+                -->
+                <h:commandButton id="entrar"
+                                 value="ENTRAR"
+                                 styleClass="button"
+                                 action="#{loginWebBean.login()}"/>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+</html>

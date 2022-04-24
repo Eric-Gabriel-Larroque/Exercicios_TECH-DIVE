@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!--
+    Aqui temos uma tag utilizada para demarcar pedaços de HTML que podem ser adicionados em outros arquivos.
+    No nosso caso, tudo o que temos dentro de <ui:composition> é replicado em cada tela em que chamamos o <ui:include src="template/_navbar.xhtml">.
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    <h:form id="navbar">
+        <nav style="background-color: #0166b3; height: 50px; margin-bottom: 10px">
+            <ul style="display: flex; list-style-type: none; margin: 0; align-items:center; height: 50px">
+                <li style="margin-right: 10px; margin-left: 10px">
+                    <p:link style="color: white" href="/index.xhtml">Home</p:link>
+                </li>
+                <li style="margin-right: 10px; margin-left: 10px">
+                    <p:link style="color: white" href="/request-scoped.xhtml">Request Scoped</p:link>
+                </li>
+                <li style="margin-right: 10px; margin-left: 10px">
+                    <p:link style="color: white" href="/view-scoped.xhtml">View Scoped</p:link>
+                </li>
+                <li style="margin-right: 10px; margin-left: 10px">
+                    <p:link style="color: white" href="/turma.xhtml">Cadastro de turma</p:link>
+                </li>
+                <li style="margin-right: 10px; margin-left: 10px">
+                    <p:link style="color: white" href="/estudante.xhtml">Cadastro de estudante</p:link>
+                 </li>
+                <li style="margin-right: 10px; margin-left: 10px">
+                    <p:commandLink id="sair"
+                                   process="@this"
+                                   style="color: white"
+                                   action="#{loginWebBean.logout()}">
+                        Sair
+                    </p:commandLink>
+                </li>
+            </ul>
+        </nav>
+    </h:form>
+</ui:composition>

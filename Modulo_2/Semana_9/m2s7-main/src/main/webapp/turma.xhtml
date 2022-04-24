@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en"
+      lang="en">
+
+<h:head>
+    <title>Cadastro de turma</title>
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.0/primeflex.css"/>
+</h:head>
+
+<h:body style="margin: 0 !important;">
+    <ui:include src="template/_navbar.xhtml"/>
+    <f:metadata>
+        <f:viewAction action="#{turmaCadastroWebBean.inicializar()}"/>
+    </f:metadata>
+
+    <h:form id="cadastroTurma">
+        <p:messages id="messages" showDetail="true" showIcon="false" showSummary="false" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+
+        <p:tabView>
+            <p:tab title="Dados cadastrais">
+                <div class="grid">
+                    <div class="col-12">
+                        <div class="col-2">
+                            <p:outputLabel for="nomeTurma" value="Nome da turma: "/>
+                            <p:inputText id="nomeTurma" value="#{turmaCadastroWebBean.turmaDTO.nome}"/>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="col-2">
+                            <p:outputLabel for="dataInicio" value="Data de início: "/>
+                            <p:calendar id="dataInicio"
+                                        pattern="dd/MM/yyyy"
+                                        value="#{turmaCadastroWebBean.turmaDTO.dataInicio}"/>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="col-2">
+                            <p:outputLabel for="dataTermino" value="Data de término: "/>
+                            <p:calendar id="dataTermino"
+                                        pattern="dd/MM/yyyy"
+                                        value="#{turmaCadastroWebBean.turmaDTO.dataTermino}"/>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="col-3 m-1">
+                            <p:commandButton id="botaoCadastrar"
+                                             process="@form"
+                                             value="Cadastrar"
+                                             action="#{turmaCadastroWebBean.cadastrar()}"/>
+                        </div>
+                    </div>
+                </div>
+            </p:tab>
+            <p:tab title="Estudantes">
+                <div class="grid">
+
+                    <p:outputLabel for="listaEstudantes" value="Estudantes: "/>
+                    <p:selectOneMenu id="listaEstudantes"
+                                     converter="omnifaces.SelectItemsConverter"
+                                     value="#{turmaCadastroWebBean.estudanteSelecionado}">
+                        <f:selectItem itemLabel="Selecione" itemValue="#{null}"/>
+                        <f:selectItems value="#{turmaCadastroWebBean.estudantesSemTurmas}"
+                                       var="estudante"
+                                       itemLabel="#{estudante.nome}"
+                                       itemValue="#{estudante}"/>
+                        <p:ajax process="@this"
+                                update="adicionarEstudante"/>
+                    </p:selectOneMenu>
+
+                    <p:commandButton id="adicionarEstudante"
+                                     value="adicionar"
+                                     process="@this"
+                                     disabled="#{turmaCadastroWebBean.desabilitarAdicionarEstudante()}"
+                                     action="#{turmaCadastroWebBean.adicionarEstudante()}"
+                                     update="tabelaEstudantes, adicionarEstudante, listaEstudantes"/>
+
+                    <div class="col-12">
+                        <p:dataTable id="tabelaEstudantes"
+                                     value="#{turmaCadastroWebBean.turmaDTO.estudantes}"
+                                     var="estudante"
+                                     emptyMessage="Nenhum estudante cadastrado na turma.">
+                            <f:facet name="header">
+                                Estudantes
+                            </f:facet>
+
+                            <p:column headerText="ID">
+                                <h:outputText value="#{estudante.idEstudante}"/>
+                            </p:column>
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{estudante.nome}"/>
+                            </p:column>
+                            <p:column headerText="Data de nascimento">
+                                <h:outputText value="#{estudante.dataNascimento}"/>
+                            </p:column>
+                            <p:column headerText="E-mail">
+                                <h:outputText value="#{estudante.email}"/>
+                            </p:column>
+                            <p:column headerText="Ação">
+                                <p:commandButton id="removerEstudante"
+                                                 title="Excluir estudante"
+                                                 action="#{turmaCadastroWebBean.removerEstudante(estudante)}"
+                                                 update="tabelaEstudantes"
+                                                 styleClass="ui-button-danger"
+                                                 icon="pi pi-times"
+                                                    process="@this">
+                                    <p:confirm message="Tem certeza que deseja remover o estudante?"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+                        </p:confirmDialog>
+                    </div>
+                </div>
+            </p:tab>
+        </p:tabView>
+    </h:form>
+</h:body>
+</html>

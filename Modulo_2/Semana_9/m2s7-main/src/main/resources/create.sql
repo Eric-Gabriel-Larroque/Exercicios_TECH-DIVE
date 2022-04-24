@@ -1,0 +1,1 @@
+INSERT INTO public.turma (id_turma, datainicio, datatermino, nome) VALUES (5000, now(), now(), 'DevinHouse'), (5001, now(), now(), 'TechDive'), (5002, now(), now(), 'Turma Experimental mt doida')
