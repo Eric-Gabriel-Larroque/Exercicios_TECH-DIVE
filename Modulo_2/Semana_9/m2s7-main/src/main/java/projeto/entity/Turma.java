@@ -30,7 +30,7 @@ public class Turma {
     private List<Estudante> estudantes = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name="id_escola", nullable=false)
+    @JoinColumn(name="id_escola")
     private Escola escola;
 
     public Long getIdTurma() {
