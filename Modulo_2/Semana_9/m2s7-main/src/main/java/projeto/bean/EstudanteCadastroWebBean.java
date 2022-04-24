@@ -3,9 +3,11 @@ package projeto.bean;
 import org.omnifaces.cdi.Param;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
+import projeto.dto.EnderecoDTO;
 import projeto.dto.EstudanteDTO;
 import projeto.dto.TurmaDTO;
 import projeto.exception.BusinessException;
+import projeto.service.EnderecoService;
 import projeto.service.EstudanteService;
 import projeto.service.TurmaService;
 import projeto.utils.MessageUtils;
@@ -23,6 +25,8 @@ public class EstudanteCadastroWebBean implements Serializable {
 
     private EstudanteDTO estudanteDTO = new EstudanteDTO();
 
+    private EnderecoDTO enderecoDTO = new EnderecoDTO();
+
     private List<TurmaDTO> turmas = new ArrayList<>();
 
     @Param(name = "idEstudante")
@@ -33,6 +37,9 @@ public class EstudanteCadastroWebBean implements Serializable {
 
     @Inject
     private TurmaService turmaService;
+
+    @Inject
+    private EnderecoService enderecoService;
 
     public void inicializar() {
         if (idEstudante != null) {
@@ -77,5 +84,13 @@ public class EstudanteCadastroWebBean implements Serializable {
 
     public void setTurmas(List<TurmaDTO> turmas) {
         this.turmas = turmas;
+    }
+
+    public EnderecoDTO getEnderecoDTO() {
+        return enderecoDTO;
+    }
+
+    public void setEnderecoDTO(EnderecoDTO enderecoDTO) {
+        this.enderecoDTO = enderecoDTO;
     }
 }
