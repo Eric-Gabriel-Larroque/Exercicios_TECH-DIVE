@@ -84,13 +84,15 @@ public class EscolaBusiness {
         escola.setEndereco(endereco);
 
         for(TurmaDTO turmaDTO: escolaDTO.getTurmas()) {
-            if(escolaDTO.getTurmas().stream().noneMatch(t->t.getIdTurma().equals(turmaDTO.getIdTurma()))) {
+            if(escolaDTO.getTurmas().stream().anyMatch(t->t.getIdTurma().equals(turmaDTO.getIdTurma()))) {
                 Turma turma = escolaRepository.find(Turma.class,turmaDTO.getIdTurma());
 
                 if(turma == null) {
                     throw new BusinessException("Turma não encontrada");
                 }
                 turma.setEscola(escola);
+                turmaDTO.setNomeEscola(escolaDTO.getNome());
+                turmaDTO.getEstudantes().forEach(e->e.setNomeEscola(escolaDTO.getNome()));
             }
         }
 

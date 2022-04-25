@@ -45,6 +45,7 @@ public class EstudanteBusiness {
         }
 
         estudante.setTurma(turma);
+        estudanteDTO.setNomeTurma(turma.getNome());
 
         Endereco endereco = estudanteRepository.find(Endereco.class,estudanteDTO.getIdEndereco());
 
