@@ -29,4 +29,8 @@ public class EstudanteService {
     public List<EstudanteDTO> consultarEstudantePorNomeOuMatricula(String query) {
         return estudanteRepository.consultarEstudantePorNomeOuMatricula(query);
     }
+
+    public List<EstudanteDTO> buscar(EstudanteDTO estudanteDTO) throws BusinessException{
+        return estudanteBusiness.buscar(estudanteDTO);
+    }
 }

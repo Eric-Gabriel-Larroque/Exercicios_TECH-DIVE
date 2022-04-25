@@ -43,4 +43,8 @@ public class TurmaService {
     public List<TurmaDTO> consultarTurmasSemEscola() {
         return turmaRepository.consultarTurmasSemEscola();
     }
+
+    public List<TurmaDTO> consultarTurmaPorNomeOuCodigo(String query) {
+        return turmaRepository.consultarTurmaPorNomeOuCodigo(query);
+    }
 }

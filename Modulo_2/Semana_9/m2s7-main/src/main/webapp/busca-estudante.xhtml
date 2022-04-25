@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en"
+      lang="en">
+
+<h:head>
+    <title>Busca de estudante</title>
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.0/primeflex.css"/>
+    <h:outputStylesheet name="css/styles.css" />
+</h:head>
+
+<h:body style="margin: 0 !important;">
+    <ui:include src="template/_navbar.xhtml"/>
+
+    <h:form id="buscaTurma">
+        <p:messages id="messages" showDetail="true" showIcon="false" showSummary="false" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+
+        <div class="grid">
+            <p:fieldset legend="Filtros" styleClass="mg-l-20">
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel for="idEstudante" value="Código: " />
+                        <p:inputNumber id="idEstudante"
+                                       decimalSeparator=""
+                                       thousandSeparator=""
+                                       decimalPlaces="0"
+                                       value="#{buscaEstudanteWebBean.estudanteDTO.idEstudante}"
+                        >
+                            <p:ajax process="@this" />
+                        </p:inputNumber>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel for="nomeEstudante" value="Nome: " />
+                        <p:inputText id="nomeEstudante" value="#{buscaEstudanteWebBean.estudanteDTO.nome}">
+                            <p:ajax process="@this" />
+                        </p:inputText>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel for="emailEstudante" value="E-mail: " />
+                        <p:inputText id="emailEstudante" value="#{buscaEstudanteWebBean.estudanteDTO.email}">
+                            <p:ajax process="@this" />
+                        </p:inputText>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel for="dataNascimento" value="Data de nascimento: " />
+                        <p:calendar id="dataNascimento"
+                                    pattern="dd/MM/yyyy"
+                                    value="#{buscaEstudanteWebBean.estudanteDTO.dataNascimento}">
+                            <p:ajax event="dateSelect" process="@this"/>
+                            <p:ajax event="change" process="@this"/>
+                            <p:ajax process="@this"/>
+                        </p:calendar>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel for="turma" value="Código/Nome da Turma: " />
+                        <p:autoComplete id="turma"
+                                        minQueryLength="3"
+                                        queryDelay="1000"
+                                        emptyMessage="Nenhuma turma encontrada"
+                                        forceSelection="true"
+                                        maxResults="15"
+                                        cache="true"
+                                        cacheTimeout="3000000"
+                                        completeMethod="#{buscaEstudanteWebBean.consultarTurmaPorNomeOuCodigo}"
+                                        var="turma"
+                                        value="#{buscaEstudanteWebBean.estudanteDTO}"
+                                        itemLabel="#{turma.nome}"
+                                        itemValue="#{turma.idTurma}"
+                        >
+                            <p:ajax event="itemSelect" process="@this" global="false"/>
+                            <p:ajax event="clear" process="@this" global="false"/>
+                        </p:autoComplete>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel for="nomeEscola" value="Escola: " />
+                        <p:inputText id="nomeEscola" value="#{estudanteCadastroWebBean.estudanteDTO.nomeEscola}" />
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="col-3 m-1">
+                        <p:commandButton id="buscar"
+                                         value="Buscar"
+                                         process="@this"
+                                         update="@form"
+                                         action="#{buscaEstudanteWebBean.buscar()}"/>
+                    </div>
+                </div>
+            </p:fieldset>
+
+            <div class="col-12">
+                <p:fieldset id="estudantes"
+                            legend="Estudantes"
+                            rendered="#{buscaEstudanteWebBean.buscaFeita}"
+                >
+                    <p:dataTable id="estudantesEncontrados"
+                                 value="#{buscaEstudanteWebBean.estudantesEncontrados}"
+                                 var="estudante"
+                                 emptyMessage="Nenhum estudante encontrado."
+                    >
+                        <p:column headerText="Ação">
+                            <p:link id="acessarEstudante"
+                                    title="Acessar cadastro de estudante"
+                                    target="_BLANK"
+                                    href="http://localhost:8080/estudante.xhtml?idEstudante=#{estudante.idEstudante}">
+                                <em class="pi pi-external-link"/>
+                            </p:link>
+                        </p:column>
+
+                        <p:column headerText="Matrícula">
+                            <p:outputLabel value="#{estudante.idEstudante}" />
+                        </p:column>
+
+                        <p:column headerText="Nome">
+                            <p:outputLabel value="#{estudante.nome}" />
+                        </p:column>
+
+                        <p:column headerText="E-mail">
+                            <p:outputLabel value="#{estudante.idEstudante}" />
+                        </p:column>
+
+                        <p:column headerText="Data de Nascimento">
+                            <p:outputLabel value="#{estudante.dataNascimento}" />
+                        </p:column>
+
+                        <p:column headerText="Turma">
+                            <p:outputLabel value="#{estudante.idTurma} - #{estudante.nomeTurma} (#{estudante.nomeEscola})" />
+                        </p:column>
+
+                        <p:column headerText="Status">
+                            <p:outputLabel value="#{estudante.status}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:fieldset>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+</html>

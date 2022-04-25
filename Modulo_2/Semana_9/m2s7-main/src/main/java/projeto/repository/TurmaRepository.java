@@ -46,6 +46,10 @@ public class TurmaRepository extends GenericRepository {
             query.setParameter("idEstudante", filtro.getIdEstudante());
         }
 
+        if(filtro.getIdEscola() != null) {
+            query.setParameter("idEscola",filtro.getIdEscola());
+        }
+
         if (!StringUtils.isBlank(filtro.getNome())) {
             String nome = "%" + filtro.getNome() + "%";
             nome = nome.toLowerCase();
@@ -70,6 +74,13 @@ public class TurmaRepository extends GenericRepository {
             hql = hql.concat("JOIN t.estudantes e ");
 
             hql = hql.concat(andOrWhere).concat("e.idEstudante = :idEstudante ");
+            andOrWhere = "AND ";
+        }
+
+        if(filtro.getIdEscola() != null) {
+            hql = hql.concat("JOIN t.escola esc ");
+            andOrWhere = "WHERE ";
+            hql = hql.concat(andOrWhere).concat("esc.idEscola = :idEscola ");
             andOrWhere = "AND ";
         }
 
@@ -100,5 +111,21 @@ public class TurmaRepository extends GenericRepository {
                         "FROM Turma t " +
                         "WHERE t.escola is null", TurmaDTO.class)
                 .getResultList();
+    }
+
+    public List<TurmaDTO> consultarTurmaPorNomeOuCodigo(String query) {
+        query = "%" + query + "%";
+        query = query.toLowerCase();
+
+        try {
+            return entityManager.createQuery("SELECT new projeto.dto.TurmaDTO(t.idTurma, t.nome) " +
+                            "FROM Turma t " +
+                            "WHERE CAST(t.idTurma AS string) = :query " +
+                            "OR LOWER(t.nome) LIKE :query", TurmaDTO.class)
+                    .setParameter("query", query)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return new ArrayList<>();
+        }
     }
 }

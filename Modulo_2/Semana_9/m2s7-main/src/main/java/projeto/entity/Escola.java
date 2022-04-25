@@ -7,7 +7,14 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@NamedQuery(
+        name = Escola.GET_ESCOLASDTO,
+        query = "SELECT new projeto.dto.EscolaDTO(e.idEscola, e.nome) " +
+                "FROM Escola e " +
+                "ORDER BY e.idEscola")
 public class Escola {
+
+    public static final String GET_ESCOLASDTO = "GET_ESCOLASDTO";
 
     @Id
     @GeneratedValue
@@ -19,13 +26,13 @@ public class Escola {
 
 
     @ManyToOne
-    @JoinColumn(name = "id_endereco", nullable = false)
+    @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
     private Date criacao;
 
 
-    @OneToMany(mappedBy = "escola")
+    @OneToMany(mappedBy = "escola", fetch = FetchType.LAZY)
     List<Turma> turmas;
 
     public Long getIdEscola() {

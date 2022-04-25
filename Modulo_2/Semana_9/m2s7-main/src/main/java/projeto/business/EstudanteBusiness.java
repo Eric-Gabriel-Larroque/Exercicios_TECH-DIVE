@@ -94,4 +94,22 @@ public class EstudanteBusiness {
 
         return new EstudanteDTO(estudante);
     }
+
+    public List<EstudanteDTO> buscar(EstudanteDTO estudanteDTO) throws BusinessException {
+        verificaCamposNulos(estudanteDTO);
+        return estudanteRepository.buscar(estudanteDTO);
+    }
+
+    private void verificaCamposNulos(EstudanteDTO estudanteDTO) throws BusinessException {
+
+        if (StringUtils.isBlank(estudanteDTO.getNome())
+                && StringUtils.isBlank(estudanteDTO.getNomeTurma())
+                && StringUtils.isBlank(estudanteDTO.getNomeEscola())
+                && StringUtils.isBlank(estudanteDTO.getEmail())
+                && estudanteDTO.getDataNascimento() == null
+                && estudanteDTO.getIdEstudante() == null
+                && estudanteDTO.getIdTurma() == null) {
+            throw new BusinessException("Insira ao menos um filtro para realizar a busca.");
+        }
+    }
 }

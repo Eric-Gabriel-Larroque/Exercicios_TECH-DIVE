@@ -21,109 +21,160 @@
         <p:messages id="messages" showDetail="true" showIcon="false" showSummary="false" closable="true">
             <p:autoUpdate/>
         </p:messages>
+        <div class="grid">
+            <p:fieldset id="filtros" legend="Filtros">
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel value="Código: "/>
+                        <p:inputNumber id="codigoTurma"
+                                       decimalPlaces="0"
+                                       decimalSeparator=""
+                                       thousandSeparator=""
+                                       value="#{buscaTurmaWebBean.filtro.idTurma}">
+                            <p:ajax process="@this"/>
+                        </p:inputNumber>
+                    </div>
+                </div>
 
-        <p:fieldset id="filtros" legend="Filtros">
-            <p:outputLabel value="Código: "/>
-            <p:inputNumber id="codigoTurma"
-                           decimalPlaces="0"
-                           decimalSeparator=""
-                           thousandSeparator=""
-                           value="#{buscaTurmaWebBean.filtro.idTurma}">
-                <p:ajax process="@this"/>
-            </p:inputNumber>
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel value="Nome: "/>
+                        <p:inputText id="nomeTurma" value="#{buscaTurmaWebBean.filtro.nome}">
+                            <p:ajax process="@this"/>
+                        </p:inputText>
+                    </div>
+                </div>
 
-            <p:outputLabel value="Nome: "/>
-            <p:inputText id="nomeTurma" value="#{buscaTurmaWebBean.filtro.nome}">
-                <p:ajax process="@this"/>
-            </p:inputText>
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel value="Nome da escola: "/>
+                        <p:autoComplete id="autocompleteEscola"
+                                        minQueryLength="3"
+                                        queryDelay="1000"
+                                        emptyMessage="Nenhuma escola encontrada"
+                                        forceSelection="true"
+                                        maxResults="15"
+                                        cache="true"
+                                        cacheTimeout="3000000"
+                                        completeMethod="#{buscaTurmaWebBean.consultaEscolaPeloNome}"
+                                        value="#{buscaTurmaWebBean.filtro.idEscola}"
+                                        var="escola"
+                                        itemValue="#{escola}"
+                                        itemLabel="#{escola.nome}">
+                            <p:ajax event="itemSelect" process="@this" global="false"/>
+                            <p:ajax event="clear" process="@this" global="false"/>
+                        </p:autoComplete>
+                    </div>
+                </div>
 
-            <p:outputLabel value="Matrícula/Nome do estudante: "/>
-            <p:autoComplete id="autocompleteEstudante"
-                            minQueryLength="3"
-                            queryDelay="1000"
-                            emptyMessage="Nenhum estudante encontrado"
-                            forceSelection="true"
-                            maxResults="15"
-                            cache="true"
-                            cacheTimeout="3000000"
-                            completeMethod="#{buscaTurmaWebBean.consultarEstudantePorNomeOuMatricula}"
-                            value="#{buscaTurmaWebBean.filtro.idEstudante}"
-                            var="estudante"
-                            itemValue="#{estudante.idEstudante}"
-                            itemLabel="#{estudante.nome}">
-                <p:ajax event="itemSelect" process="@this" global="false"/>
-                <p:ajax event="clear" process="@this" global="false"/>
-            </p:autoComplete>
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel value="Matrícula/Nome do estudante: "/>
+                        <p:autoComplete id="autocompleteEstudante"
+                                        minQueryLength="3"
+                                        queryDelay="1000"
+                                        emptyMessage="Nenhum estudante encontrado"
+                                        forceSelection="true"
+                                        maxResults="15"
+                                        cache="true"
+                                        cacheTimeout="3000000"
+                                        completeMethod="#{buscaTurmaWebBean.consultarEstudantePorNomeOuMatricula}"
+                                        value="#{buscaTurmaWebBean.filtro.idEstudante}"
+                                        var="estudante"
+                                        itemValue="#{estudante.idEstudante}"
+                                        itemLabel="#{estudante.nome}">
+                            <p:ajax event="itemSelect" process="@this" global="false"/>
+                            <p:ajax event="clear" process="@this" global="false"/>
+                        </p:autoComplete>
+                    </div>
+                </div>
 
-            <p:outputLabel value="Início: "/>
-            <p:calendar id="dataInicio"
-                        pattern="dd/MM/yyyy"
-                        value="#{buscaTurmaWebBean.filtro.dataInicio}">
-                <p:ajax event="dateSelect" process="@this"/>
-                <p:ajax event="change" process="@this"/>
-                <p:ajax process="@this"/>
-            </p:calendar>
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel value="Início: "/>
+                        <p:calendar id="dataInicio"
+                                    pattern="dd/MM/yyyy"
+                                    value="#{buscaTurmaWebBean.filtro.dataInicio}">
+                            <p:ajax event="dateSelect" process="@this"/>
+                            <p:ajax event="change" process="@this"/>
+                            <p:ajax process="@this"/>
+                        </p:calendar>
+                    </div>
+                </div>
 
-            <p:outputLabel value="Término: "/>
-            <p:calendar id="dataTermino"
-                        pattern="dd/MM/yyyy"
-                        value="#{buscaTurmaWebBean.filtro.dataTermino}">
-                <p:ajax event="dateSelect" process="@this"/>
-                <p:ajax event="change" process="@this"/>
-                <p:ajax process="@this"/>
-            </p:calendar>
+                <div class="col-12">
+                    <div class="col-2">
+                        <p:outputLabel value="Término: "/>
+                        <p:calendar id="dataTermino"
+                                    pattern="dd/MM/yyyy"
+                                    value="#{buscaTurmaWebBean.filtro.dataTermino}">
+                            <p:ajax event="dateSelect" process="@this"/>
+                            <p:ajax event="change" process="@this"/>
+                            <p:ajax process="@this"/>
+                        </p:calendar>
+                    </div>
+                </div>
 
-            <p:commandButton id="buscar"
-                             value="Buscar"
-                             process="@this"
-                             update="@form"
-                             action="#{buscaTurmaWebBean.buscar()}"/>
-        </p:fieldset>
+                <div class="col-12">
+                    <div class="col-3 m-1">
+                        <p:commandButton id="buscar"
+                                         value="Buscar"
+                                         process="@this"
+                                         update="@form"
+                                         action="#{buscaTurmaWebBean.buscar()}"/>
+                    </div>
+                </div>
+            </p:fieldset>
 
-        <p:fieldset id="turmas" legend="Turmas"
-                    rendered="#{buscaTurmaWebBean.buscaFeita}">
-            <p:dataTable id="turmasEncontradas"
-                         value="#{buscaTurmaWebBean.turmasEncontradas}"
-                         var="turma"
-                         emptyMessage="Nenhuma turma encontrada.">
-                <p:column headerText="Ação">
-                    <p:link id="acessarTurma"
-                            title="Acessar cadastro da turma"
-                            target="_BLANK"
-                            href="http://localhost:8080/turma.xhtml?idTurma=#{turma.idTurma}">
-                        <em class="pi pi-external-link"/>
-                    </p:link>
-                </p:column>
+            <p:fieldset id="turmas" legend="Turmas"
+                        rendered="#{buscaTurmaWebBean.buscaFeita}">
+                <p:dataTable id="turmasEncontradas"
+                             value="#{buscaTurmaWebBean.turmasEncontradas}"
+                             var="turma"
+                             emptyMessage="Nenhuma turma encontrada.">
+                    <p:column headerText="Ação">
+                        <p:link id="acessarTurma"
+                                title="Acessar cadastro da turma"
+                                target="_BLANK"
+                                href="http://localhost:8080/turma.xhtml?idTurma=#{turma.idTurma}">
+                            <em class="pi pi-external-link"/>
+                        </p:link>
+                    </p:column>
 
-                <p:column headerText="Código">
-                    <h:outputText value="#{turma.idTurma}"/>
-                </p:column>
+                    <p:column headerText="Código">
+                        <h:outputText value="#{turma.idTurma}"/>
+                    </p:column>
 
-                <p:column headerText="Nome">
-                    <h:outputText value="#{turma.nome}"/>
-                </p:column>
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{turma.nome}"/>
+                    </p:column>
 
-                <p:column headerText="Início">
-                    <h:outputText value="#{turma.dataInicio}">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:outputText>
-                </p:column>
+                    <p:column headerText="Início">
+                        <h:outputText value="#{turma.dataInicio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
 
-                <p:column headerText="Término">
-                    <h:outputText value="#{turma.dataTermino}">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:outputText>
-                </p:column>
+                    <p:column headerText="Término">
+                        <h:outputText value="#{turma.dataTermino}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
 
-                <p:column headerText="Estudantes">
-                    <h:outputText value="#{turma.quantidadeEstudantes}"/>
-                </p:column>
+                    <p:column headerText="Escola">
+                        <h:outputText value="#{turma.nomeEscola}" />
+                    </p:column>
 
-                <p:column headerText="Status">
-                    <h:outputText value="#{turma.status}"/>
-                </p:column>
-            </p:dataTable>
-        </p:fieldset>
+                    <p:column headerText="Estudantes">
+                        <h:outputText value="#{turma.quantidadeEstudantes}"/>
+                    </p:column>
+
+                    <p:column headerText="Status">
+                        <h:outputText value="#{turma.status}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+        </div>
     </h:form>
 </h:body>
 </html>

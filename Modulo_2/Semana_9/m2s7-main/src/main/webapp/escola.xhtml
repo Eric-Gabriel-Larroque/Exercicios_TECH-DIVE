@@ -49,8 +49,9 @@
                 <div class="col-12">
                     <div class="col-2">
                         <p:outputLabel for="turmasDisponiveis" value="Turmas: "/>
-                        <p:selectManyMenu valueChangeListener="#{turmaCadastroWebBean.cadastrar()}"
+                        <p:selectManyMenu
                                           id="turmasDisponiveis"
+                                          showCheckbox="true"
                                           value="#{escolaCadastroWebBean.escolaDTO.turmas}">
                             <f:selectItems value="#{escolaCadastroWebBean.turmasDisponiveis}"
                                            var="turma"

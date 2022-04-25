@@ -1,0 +1,16 @@
+.mg-l-20 {
+    margin-left: 20px;
+}
+
+.flex-jc-sb {
+    display: flex;
+    justify-content: space-between;
+}
+
+.h-400 {
+    height: 400px;
+}
+
+.w-50 {
+    width: 50%;
+}

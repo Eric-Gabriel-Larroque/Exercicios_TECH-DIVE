@@ -63,7 +63,7 @@ public class EscolaCadastroWebBean implements Serializable {
             escolaService.cadastrar(escolaDTO);
             if (idEscola == null) {
                 MessageUtils.returnGlobalMessageOnSuccess("Salvo com sucesso!");
-                Faces.redirect("/estudante.xhtml?idEstudante=" + escolaDTO.getIdEscola());
+                Faces.redirect("/escola.xhtml?idEstudante=" + escolaDTO.getIdEscola());
             } else {
                 MessageUtils.returnMessageOnSuccess("Salvo com sucesso!");
             }

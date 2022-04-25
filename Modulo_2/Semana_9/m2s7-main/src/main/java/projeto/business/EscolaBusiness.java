@@ -14,6 +14,7 @@ import projeto.repository.EscolaRepository;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EscolaBusiness {
 
@@ -29,14 +30,15 @@ public class EscolaBusiness {
         return new EscolaDTO(escola);
     }
 
-    public void cadastrar(EscolaDTO escolaDTO) {
-
+    public void cadastrar(EscolaDTO escolaDTO) throws BusinessException {
+        validarCadastrar(escolaDTO);
+        cadastrarEscolaNoBanco(escolaDTO);
     }
 
     public void validarCadastrar(EscolaDTO escolaDTO) throws BusinessException {
         List<String> erros = new ArrayList<>();
 
-        if(escolaDTO.getTurmas().isEmpty()) {
+        if(escolaDTO.getTurmas() == null) {
             erros.add("Necessário adicionar pelo menos uma turma.");
         }
 
@@ -81,21 +83,12 @@ public class EscolaBusiness {
 
         escola.setEndereco(endereco);
 
-        for (Turma turma : escola.getTurmas()) {
-            if (escolaDTO.getTurmas()
-                    .stream()
-                    .noneMatch(turmaDTO -> turmaDTO.getIdTurma().equals(turma.getIdTurma()))) {
-                turma.setEscola(null);
-            }
-        }
+        for(TurmaDTO turmaDTO: escolaDTO.getTurmas()) {
+            if(escolaDTO.getTurmas().stream().noneMatch(t->t.getIdTurma().equals(turmaDTO.getIdTurma()))) {
+                Turma turma = escolaRepository.find(Turma.class,turmaDTO.getIdTurma());
 
-        for (TurmaDTO turmaDTO : escolaDTO.getTurmas()) {
-            if (escola.getTurmas()
-                    .stream()
-                    .noneMatch(turma -> turma.getIdTurma().equals(turmaDTO.getIdTurma()))) {
-                Turma turma = escolaRepository.find(Turma.class, turmaDTO.getIdTurma());
-                if (turma == null) {
-                    throw new BusinessException("Turma não encontrada.");
+                if(turma == null) {
+                    throw new BusinessException("Turma não encontrada");
                 }
                 turma.setEscola(escola);
             }

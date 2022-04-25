@@ -2,11 +2,13 @@ package projeto.service;
 
 import projeto.business.EscolaBusiness;
 import projeto.dto.EscolaDTO;
+import projeto.dto.TurmaDTO;
 import projeto.exception.BusinessException;
 import projeto.repository.EscolaRepository;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.List;
 
 @Stateless
 public class EscolaService {
@@ -23,5 +25,13 @@ public class EscolaService {
 
     public void cadastrar(EscolaDTO escolaDTO) throws BusinessException{
         escolaBusiness.cadastrar(escolaDTO);
+    }
+
+    public List<EscolaDTO> consultaEscolaPeloNome(String query) {
+        return escolaRepository.consultaEscolaPeloNome(query);
+    }
+
+    public List<EscolaDTO> consultarEscolas() {
+        return escolaRepository.consultarEscolas();
     }
 }

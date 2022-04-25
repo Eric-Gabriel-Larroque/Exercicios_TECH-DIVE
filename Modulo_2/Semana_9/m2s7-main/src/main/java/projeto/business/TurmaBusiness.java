@@ -117,6 +117,7 @@ public class TurmaBusiness {
     private void validarCamposNulos(FiltroTurmaDTO filtro) throws BusinessException {
         if (filtro.getIdTurma() == null
                 && StringUtils.isBlank(filtro.getNome())
+                && filtro.getIdEscola() == null
                 && filtro.getIdEstudante() == null
                 && filtro.getDataInicio() == null
                 && filtro.getDataTermino() == null) {

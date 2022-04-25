@@ -35,6 +35,11 @@ public class EscolaDTO implements Serializable {
                 .collect(Collectors.toList());
     }
 
+    public EscolaDTO(Long idEscola, String nome) {
+        this.idEscola = idEscola;
+        this.nome = nome;
+    }
+
     public Long getIdEscola() {
         return idEscola;
     }

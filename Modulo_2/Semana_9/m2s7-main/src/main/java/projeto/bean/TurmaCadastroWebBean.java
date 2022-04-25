@@ -7,6 +7,7 @@ import projeto.dto.EscolaDTO;
 import projeto.dto.EstudanteDTO;
 import projeto.dto.TurmaDTO;
 import projeto.exception.BusinessException;
+import projeto.service.EscolaService;
 import projeto.service.TurmaService;
 import projeto.utils.MessageUtils;
 
@@ -26,6 +27,9 @@ public class TurmaCadastroWebBean implements Serializable {
 
     @Inject
     private TurmaService turmaService;
+
+    @Inject
+    private EscolaService escolaService;
 
     @Param(name = "idTurma")
     private Long idTurma;
@@ -49,6 +53,7 @@ public class TurmaCadastroWebBean implements Serializable {
             }
         }
         estudantesSemTurmas = turmaService.consultarEstudantesSemTurmas();
+        escolas = escolaService.consultarEscolas();
     }
 
     public void cadastrar() {

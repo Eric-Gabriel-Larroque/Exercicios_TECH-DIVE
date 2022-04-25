@@ -1,10 +1,12 @@
 package projeto.bean;
 
 import org.omnifaces.cdi.ViewScoped;
+import projeto.dto.EscolaDTO;
 import projeto.dto.EstudanteDTO;
 import projeto.dto.FiltroTurmaDTO;
 import projeto.dto.TurmaDTO;
 import projeto.exception.BusinessException;
+import projeto.service.EscolaService;
 import projeto.service.EstudanteService;
 import projeto.service.TurmaService;
 import projeto.utils.MessageUtils;
@@ -27,6 +29,9 @@ public class BuscaTurmaWebBean implements Serializable {
     @Inject
     private EstudanteService estudanteService;
 
+    @Inject
+    private EscolaService escolaService;
+
     private FiltroTurmaDTO filtro = new FiltroTurmaDTO();
 
     private List<TurmaDTO> turmasEncontradas = new ArrayList<>();
@@ -35,6 +40,10 @@ public class BuscaTurmaWebBean implements Serializable {
 
     public List<EstudanteDTO> consultarEstudantePorNomeOuMatricula(Object query) {
         return estudanteService.consultarEstudantePorNomeOuMatricula(query.toString());
+    }
+
+    public List<EscolaDTO> consultaEscolaPeloNome(Object query) {
+        return escolaService.consultaEscolaPeloNome(query.toString());
     }
 
     public void buscar() {
