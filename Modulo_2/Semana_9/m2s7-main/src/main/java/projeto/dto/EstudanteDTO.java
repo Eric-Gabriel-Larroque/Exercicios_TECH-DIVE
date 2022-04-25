@@ -25,6 +25,8 @@ public class EstudanteDTO implements Serializable {
 
     private Date dataNascimento;
 
+    private String status;
+
     public EstudanteDTO() {
     }
 
@@ -42,6 +44,17 @@ public class EstudanteDTO implements Serializable {
         this.nome = estudante.getNome();
         this.email = estudante.getEmail();
         this.dataNascimento = estudante.getDataNascimento();
+        Date dataAtual = new Date();
+        if(estudante.getTurma() == null) {
+            this.status = "Não matriculado";
+        } else if(dataAtual.before(estudante.getTurma().getDataInicio())){
+            this.status = "Matriculado - Aguardando início";
+        } else if(dataAtual.after(estudante.getTurma().getDataInicio())
+                &&dataAtual.before(estudante.getTurma().getDataTermino())) {
+            this.status = "Matriculado - Cursando";
+        } else if(dataAtual.after(estudante.getTurma().getDataTermino())){
+            this.status = "Finalizado";
+        }
     }
 
     public Long getIdEstudante() {
@@ -106,5 +119,13 @@ public class EstudanteDTO implements Serializable {
 
     public void setNomeEscola(String nomeEscola) {
         this.nomeEscola = nomeEscola;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
