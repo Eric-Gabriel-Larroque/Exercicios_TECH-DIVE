@@ -57,10 +57,10 @@
                                         cache="true"
                                         cacheTimeout="3000000"
                                         completeMethod="#{buscaTurmaWebBean.consultaEscolaPeloNome}"
-                                        value="#{buscaTurmaWebBean.filtro.idEscola}"
+                                        value="#{buscaTurmaWebBean.filtro}"
                                         var="escola"
-                                        itemValue="#{escola}"
-                                        itemLabel="#{escola.nome}">
+                                        itemLabel="#{escola.nome}"
+                                        itemValue="#{escola.idEscola}">
                             <p:ajax event="itemSelect" process="@this" global="false"/>
                             <p:ajax event="clear" process="@this" global="false"/>
                         </p:autoComplete>
