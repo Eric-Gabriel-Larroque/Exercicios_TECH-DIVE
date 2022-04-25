@@ -20,34 +20,38 @@
             <f:viewAction action="#{escolaCadastroWebBean.inicializar()}"/>
         </f:metadata>
 
-        <h:form id="cadastroEscola">
+        <h:form id="cadastroEscola" style="margin-left: 10px">
             <p:messages id="messages" showDetail="true" showIcon="false" showSummary="false" closable="true">
                 <p:autoUpdate/>
             </p:messages>
 
             <div class="grid">
                 <div class="col -12">
-                    <p:outputLabel for="nomeEscola" value="Nome: " />
-                    <p:inputText id="nomeEscola" value="#{escolaCadastroWebBean.escolaDTO.nome}"/>
+                    <div class="col-2">
+                        <p:outputLabel for="nomeEscola" value="Nome: " />
+                        <p:inputText id="nomeEscola" value="#{escolaCadastroWebBean.escolaDTO.nome}"/>
+                    </div>
                 </div>
 
                 <div class="col-12">
-                    <ui:include src="template/_fieldset-endereco-escola.xhtml" />
+                    <ui:include src="template/_fieldset-endereco-escola.xhtml"/>
                 </div>
 
                 <div class="col -12">
-                    <p:outputLabel for="dataCriacao" value="Criação: " />
-                    <p:calendar id="dataCriacao"
-                                pattern="d/MM/yyyy"
-                                value="#{escolaCadastroWebBean.escolaDTO.criacao}"/>
+                   <div class="col-2">
+                       <p:outputLabel for="dataCriacao" value="Criação: " />
+                       <p:calendar id="dataCriacao"
+                                   pattern="d/MM/yyyy"
+                                   value="#{escolaCadastroWebBean.escolaDTO.criacao}"/>
+                   </div>
                 </div>
 
                 <div class="col-12">
                     <div class="col-2">
+                        <p:outputLabel for="turmasDisponiveis" value="Turmas: "/>
                         <p:selectManyMenu valueChangeListener="#{turmaCadastroWebBean.cadastrar()}"
                                           id="turmasDisponiveis"
                                           value="#{escolaCadastroWebBean.escolaDTO.turmas}">
-                            <f:selectItem itemLabel="Selecione" itemValue="#{null}"/>
                             <f:selectItems value="#{escolaCadastroWebBean.turmasDisponiveis}"
                                            var="turma"
                                            itemLabel="#{turma.nome}"
@@ -57,8 +61,15 @@
                     </div>
                 </div>
 
+                <div class="col-12">
+                    <div class="col-3 m-1">
+                        <p:commandButton id="botaoCadastrar"
+                                         process="@form"
+                                         value="Cadastrar"
+                                         action="#{escolaCadastroWebBean.cadastrar()}"/>
+                    </div>
+                </div>
             </div>
-
         </h:form>
     </h:body>
 </html>
