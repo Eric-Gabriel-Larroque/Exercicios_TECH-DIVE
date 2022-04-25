@@ -61,6 +61,7 @@ public class ListaBean implements Serializable {
     public String removerItens() {
         itemRepository.removerItens(itensSelecionados);
         listaItens = itemRepository.getItens();
+        itensSelecionados = new ArrayList<>();
         return null;
     }
 
