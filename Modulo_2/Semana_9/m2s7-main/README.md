@@ -50,7 +50,7 @@ O dataSource que vem por padrão se chama ExampleDS e vem configurado para se co
 - Agora que já temos quase tudo configurado, precisamos baixar o .jar do PostgreSQL e colocar no WildFly:
   - Acessar [este link](https://mvnrepository.com/artifact/org.postgresql/postgresql/42.3.3) (obs: se tiver uma versão mais nova, acessá-la);
   - Dentro do link, há uma linha chamada "Files", e nessa linha há um link escrito "jar". Clique para baixar o JAR do PostgreSQL;
-  - Agora que você já tem o JAR do banco de dados, vá até a pasta do servidor e entre em {pastaDoServidor}/modules/system/layers/base/org/postgresql/main/ e coloque o JAR lá (crie as pastas que não existirem);
+  - Agora que você já tem o JAR do banco de dados, vá até a pasta do servidor e entre em {pastaDoServidor}/modules/system/layers/base/org/postgresql/main/ e coloque o JAR lá (crie as pastas que não existirem)
   - Na mesma pasta, crie um arquivo chamado module.xml com o seguinte conteúdo:
   ```xml
     <?xml version="1.0" encoding="UTF-8"?>
