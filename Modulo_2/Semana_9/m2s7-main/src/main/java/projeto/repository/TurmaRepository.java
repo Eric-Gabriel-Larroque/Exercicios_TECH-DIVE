@@ -94,4 +94,11 @@ public class TurmaRepository extends GenericRepository {
 
         return hql.concat("ORDER BY t.idTurma");
     }
+
+    public List<TurmaDTO> consultarTurmasSemEscola() {
+        return entityManager.createQuery("SELECT new projeto.dto.TurmaDTO(t) " +
+                        "FROM Turma t " +
+                        "WHERE t.escola is null", TurmaDTO.class)
+                .getResultList();
+    }
 }

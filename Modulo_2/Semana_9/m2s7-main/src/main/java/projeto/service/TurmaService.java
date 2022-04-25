@@ -39,4 +39,8 @@ public class TurmaService {
     public List<TurmaDTO> buscar(FiltroTurmaDTO filtro) throws BusinessException {
         return turmaBusiness.buscar(filtro);
     }
+
+    public List<TurmaDTO> consultarTurmasSemEscola() {
+        return turmaRepository.consultarTurmasSemEscola();
+    }
 }
