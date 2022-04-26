@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Sistema de Cadastro de Cursos</title>
+        <h:outputStylesheet name="css/styles.css" />
+        <h:outputStylesheet name="primefaces/2.0.0/primeflex.min.css"/>
+    </h:head>
+    <h:body styleClass="p-d-flex p-flex-column p-jc-center p-ai-center bd-100-vw-100-vh-bg">
+
+        <ui:include src="template/_navbar.xhtml" />
+
+        <h:form id="form-cadastro-leitor" styleClass="form-leitor-container" >
+
+            <p:panelGrid id="panel-cadastro-curso" columns="2" styleClass="input-container" style=" width: 420px; height: 250px">
+
+                <p:outputLabel value="Código" for="input-codigo" styleClass="font-sz-16"/>
+                <h:panelGroup>
+                    <p:inputText value="#{cursoBean.curso.codigo}"
+                                 validator="#{cursoBean.validarCodigoCadastrado}"
+                                 id="input-codigo"
+                                 disabled="#{cursoBean.curso.codigo != null}"/>
+                    <p:message for="input-codigo" style="font-size: 0.8rem" />
+                </h:panelGroup>
+
+                <h:outputLabel value="Nome" for="input-nome" styleClass="font-sz-16"/>
+                <h:panelGroup>
+                    <p:inputText value="#{cursoBean.curso.nome}"
+                                 validator="#{cursoBean.validarNomeCadastrado}"
+                                 id="input-nome" maxlength="100" />
+                    <p:message for="input-nome" style="font-size: 0.8rem" />
+                </h:panelGroup>
+
+                <p:outputLabel value="Data de Inicio" for="input-data-inicio" styleClass="font-sz-16"/>
+                <h:panelGroup>
+                    <p:datePicker value="#{cursoBean.curso.dataInicio}" id="input-data-inicio" pattern="dd/MM/yyyy" />
+                    <p:message for="input-data-inicio" style="font-size: 0.8rem" />
+                </h:panelGroup>
+
+                <p:outputLabel value="Data Final" for="input-data-fim" styleClass="font-sz-16"/>
+                <h:panelGroup>
+                    <p:datePicker value="#{cursoBean.curso.dataFim}" id="input-data-fim" pattern="dd/MM/yyyy" />
+                    <p:message for="input-data-fim" style="font-size: 0.8rem" />
+                </h:panelGroup>
+            </p:panelGrid>
+
+            <h:panelGroup >
+                <p:commandButton style="margin: 20px; font-size: 16px"
+                                 value="#{cursoBean.curso.idCurso == null ? 'Cadastrar' : 'Atualizar'}"
+                                 action="#{cursoBean.salvar}"
+                                 process="@form"
+                                 update="panel-cadastro-curso"/>
+            </h:panelGroup>
+
+        </h:form>
+
+        <ui:include src="template/_footer.xhtml" />
+    </h:body>
+</html>
