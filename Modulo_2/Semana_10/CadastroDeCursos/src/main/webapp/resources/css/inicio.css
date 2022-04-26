@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+html {
+    height: 100%;
+    width: 100%;
+    font-size: 62.5%;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(300deg, #57757e, #5f9ea0 100%);
+    display: flex;
+    justify-content: space-between;
+}
+
+img {
+    width: 303px;
+    height: 130px;
+}
+
+.epicButton {
+    width: 280px;
+    height: 80px;
+    margin: 0 20px 20px 0;
+    background: rgb(214,88,60);
+    background: linear-gradient(90deg, rgba(214,88,60,1) 19%, rgba(233,96,65,1) 54%, rgba(237,81,46,1) 83%);
+    border-radius: 12px;
+    box-shadow: 0  10px 1px 0 rgb(187, 68, 42);
+    cursor: pointer;
+    transition: .3s;
+    align-self: flex-end;
+}
+.epicButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0  12px 1px 0 rgb(187, 68, 42);
+}
+
+.epicButton:active {
+    transition: .0s;
+    transform: translateY(5px);
+    box-shadow: 0  5px 1px 0 rgb(187, 68, 42);
+
+}
+a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 70px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 2.7rem;
+}

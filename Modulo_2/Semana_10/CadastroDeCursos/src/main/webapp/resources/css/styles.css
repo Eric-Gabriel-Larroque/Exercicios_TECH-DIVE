@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+.html {
+    height: 100%;
+    width: 100%;
+    font-size: 62.5%;
+}
+.body {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(300deg, #57757e, #5f9ea0 100%);
+}
