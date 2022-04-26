@@ -4,11 +4,60 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://java.sun.com/jsf/html">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Sistema de Cadastro de Cursos</title>
+        <h:outputStylesheet name="css/styles.css" />
+        <h:outputStylesheet name="primefaces/2.0.0/primeflex.min.css"/>
     </h:head>
-    <h:body>
+    <h:body styleClass="p-d-flex p-flex-column p-jc-center p-ai-center bd-100-vw-100-vh-bg">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{cursoBean.init()}" />
+        </f:metadata>
 
+        <ui:include src="template/_navbar.xhtml" />
+            <p:dataTable id="tb-cursos"
+                         value="#{cursoBean.cursos}"
+                         var="curso"
+                         tableStyle="width: 1200px; height: auto; font-size: 16px"
+                         emptyMessage="Sem registros de cursos.">
+
+               <p:column headerText="Código" styleClass="p-text-center">
+                    <h:outputText value="#{curso.codigo}" />
+                </p:column>
+
+                <p:column headerText="Nome" styleClass="p-text-center">
+                    <h:outputText value="#{curso.nome}" />
+                </p:column>
+
+                <p:column headerText="Data Início" styleClass="p-text-center">
+                    <h:outputText value="#{curso.dataInicio}" />
+                </p:column>
+
+                <p:column headerText="Data Fim" styleClass="p-text-center">
+                    <h:outputText value="#{curso.dataFim}" />
+                </p:column>
+
+                <p:column headerText="Ações" styleClass="p-text-center" >
+                    <p:commandButton id="editarCurso"
+                                     value="Editar"
+                                     action="#{cursoBean.editarCurso(curso)}"
+                                     update="tb-cursos"
+                                     style="margin-right: 30px; transform: scale(1.4); "
+                    />
+                    <p:commandButton id="deletarCurso"
+                                     value="Deletar"
+                                     action="#{cursoBean.removerCurso(curso)}"
+                                     update="tb-cursos"
+                                     style="transform: scale(1.4); background-color: tomato"/>
+                </p:column>
+            </p:dataTable>
+                <p:linkButton id="cadastrarCurso"
+                                 style="margin-top: 20px; transform: scale(1.7)"
+                                 value="Cadastrar"
+                              outcome="cadastro"
+                                 />
+        <ui:include src="template/_footer.xhtml" />
     </h:body>
 </html>
