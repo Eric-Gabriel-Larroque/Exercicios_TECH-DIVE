@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    <div style="position: fixed; top: 0; right: 0; margin-top: 80px; margin-right: 10px">
+        <h:outputText value="#{loginBean.usuario.nome}"
+                      styleClass="pi pi-user"
+                      rendered="#{loginBean.autenticado}"
+        style="margin-right: 20px; font-size: 18px; color: white; font-weight: bold"/>
+        <p:commandButton value="logout"
+                         style="transform: scale(1.4); margin-right: 5px"
+                         action="#{loginBean.logout()}"
+                         rendered="#{loginBean.autenticado}"
+        />
+    </div>
+</ui:composition>
