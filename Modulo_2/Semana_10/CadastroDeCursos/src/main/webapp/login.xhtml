@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Login</title>
+        <h:outputStylesheet name="css/styles.css" />
+        <h:outputStylesheet name="primefaces/2.0.0/primeflex.min.css"/>
+    </h:head>
+
+    <p:messages id="messages" showDetail="true" closable="true" escape="false" style="position: fixed!important; top: 0; left: 0; width: 99%; margin-top: 10px; font-size: 16px">
+        <p:autoUpdate/>
+    </p:messages>
+
+    <h:body styleClass="p-d-flex p-flex-column p-jc-center p-ai-center bd-100-vw-100-vh-bg">
+
+
+
+        <h:form id="form-login">
+
+            <p:panelGrid id="panel-login" columns="2" styleClass="input-container" style=" width: 420px; height: 250px">
+                <f:facet name="header">
+                    <p:outputLabel value="Login"
+                                   style="font-size: 20px"
+                    />
+                </f:facet>
+                <p:outputLabel value="Login: " for="input-login" style="font-size: 16px"/>
+                <h:panelGroup>
+                    <p:inputText value="#{loginBean.usuario.login}"
+                                 id="input-login"
+                          />
+                    <p:message for="input-login" style="font-size: 1.2rem; margin-top: 3px"/>
+                </h:panelGroup>
+
+                <h:outputLabel value="Senha: " for="input-senha" style="font-size: 16px"/>
+                <h:panelGroup>
+                    <p:password value="#{loginBean.usuario.senha}"
+                                 id="input-senha" maxlength="30" />
+                    <p:message for="input-senha" style="font-size: 1.2rem;  margin-top: 3px" />
+                </h:panelGroup>
+
+            </p:panelGrid>
+
+            <h:panelGroup  styleClass="p-d-flex p-jc-center">
+                <p:commandButton style="margin: 20px; font-size: 16px; transform: scale(1.2)"
+                                 value="Login"
+                                 action="#{loginBean.login()}"
+                                 process="@form"
+                                 update="panel-login"
+                />
+            </h:panelGroup>
+        </h:form>
+    </h:body>
+</html>
