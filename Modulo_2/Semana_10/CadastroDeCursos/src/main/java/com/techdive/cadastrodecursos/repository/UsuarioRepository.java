@@ -7,6 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -25,17 +26,22 @@ public class UsuarioRepository {
                 .collect(Collectors.toList());
     }
 
-    public boolean validarCredenciais(Usuario usuarioSelecionado) {
+    public boolean validarCredenciais(String email, String senha) {
 
-        boolean isUsuarioValido = usuarios.stream().filter(u->u.getLogin().equals(usuarioSelecionado.getLogin()))
-                                .anyMatch(u->u.getSenha().equals(usuarioSelecionado.getSenha()));
+        boolean isUsuarioValido = usuarios.stream().filter(u->u.getEmail().equals(email))
+                                .anyMatch(u->u.getSenha().equals(senha));
         if(isUsuarioValido) {
 
-            String nome = usuarios.stream().filter(u->u.getLogin().equals(usuarioSelecionado.getLogin())&&
-                    u.getSenha().equals(usuarioSelecionado.getSenha()))
-                            .findFirst().get().getNome();
-            usuarioSelecionado.setNome(nome);
         }
         return isUsuarioValido;
+    }
+
+    public Usuario obterPor(String email, String senha) {
+        Usuario user = usuarios.stream().filter
+                (u->u.getSenha().equals(senha))
+                .filter(u->u.getEmail().equals(email))
+                .findFirst().get();
+
+        return new Usuario(user.getEmail(), user.getNome());
     }
 }
