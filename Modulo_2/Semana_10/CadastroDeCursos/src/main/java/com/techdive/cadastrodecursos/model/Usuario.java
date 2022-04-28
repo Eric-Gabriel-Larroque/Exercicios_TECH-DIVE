@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 public class Usuario {
 
     @NotBlank(message = "{atr.obrigatorio}")
-    private String login;
+    private String email;
 
     @NotBlank(message = "{atr.obrigatorio}")
     private String senha;
@@ -16,18 +16,23 @@ public class Usuario {
 
     }
 
-    public Usuario(String login, String senha, String nome) {
-        this.login = login;
+    public Usuario(String email, String senha, String nome) {
+        this.email = email;
         this.senha = senha;
         this.nome = nome;
     }
 
-    public String getLogin() {
-        return login;
+    public Usuario(String email, String nome) {
+        this.email = email;
+        this.nome = nome;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
