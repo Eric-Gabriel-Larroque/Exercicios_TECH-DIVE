@@ -78,7 +78,7 @@ public class Curso {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Curso curso = (Curso) o;
-        return Objects.equals(idCurso, curso.idCurso) && Objects.equals(codigo, curso.codigo) && Objects.equals(nome, curso.nome) && Objects.equals(dataInicio, curso.dataInicio) && Objects.equals(dataFim, curso.dataFim);
+        return idCurso.equals(curso.idCurso) && codigo.equals(curso.codigo) && nome.equals(curso.nome);
     }
 
     @Override
