@@ -23,11 +23,15 @@
                 </p:column>
 
                 <p:column headerText="Data Início" styleClass="p-text-center">
-                    <h:outputText value="#{curso.dataInicio}" />
+                    <h:outputText value="#{curso.dataInicio}">
+                        <f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+                    </h:outputText>
                 </p:column>
 
                 <p:column headerText="Data Fim" styleClass="p-text-center">
-                    <h:outputText value="#{curso.dataFim}" />
+                    <h:outputText value="#{curso.dataFim}">
+                        <f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+                    </h:outputText>
                 </p:column>
 
                 <p:column headerText="Ações" styleClass="p-text-center p-jc-around" >
