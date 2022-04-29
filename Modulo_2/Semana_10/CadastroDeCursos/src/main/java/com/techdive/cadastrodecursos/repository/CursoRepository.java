@@ -44,27 +44,23 @@ public class CursoRepository {
 
     public boolean codigoExistente(String codigo)  {
         return cursos.stream().filter(curso -> curso.getCodigo().equals(codigo))
-                .collect(Collectors.toList()).size()>=1;
+                .collect(Collectors.toList()).size()==1;
     }
 
     public boolean nomeExistente(String nome) {
 
         return cursos.stream().filter(curso -> curso.getNome().equals(nome))
-                .collect(Collectors.toList()).size()>=1;
+                .collect(Collectors.toList()).size()==1;
     }
 
     public void alterarCurso(Curso curso) {
         removerCurso(curso.getIdCurso());
         cursos.add(curso);
-        Collections.sort(cursos, Comparator.comparing(Curso::getIdCurso));
+        Collections.sort(cursos, Comparator.comparing(Curso::getCodigo));
     }
 
     public List<Curso> getCursos() {
         return cursos;
-    }
-
-    public void setCursos(List<Curso> cursos) {
-        this.cursos = cursos;
     }
 
 }

@@ -16,7 +16,7 @@ public class UsuarioRepository {
     List<Usuario> usuarios = new ArrayList<>();
 
     public UsuarioRepository() {
-        usuarios.add(new Usuario("adm@email.com","senha123","John Doe"));
+        usuarios.add(new Usuario("adm@email.com","1234","John Doe"));
         usuarios.add(new Usuario("user@email.com","senha321", "Janny Doe"));
     }
 
