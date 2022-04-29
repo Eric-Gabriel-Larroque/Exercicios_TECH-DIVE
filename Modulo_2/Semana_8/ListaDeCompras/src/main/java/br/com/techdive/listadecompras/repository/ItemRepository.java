@@ -9,11 +9,10 @@ import java.util.*;
 public class ItemRepository {
 
     private List<Item> itens = new ArrayList<>();
-    private Long idAtual = 0L;
 
     public ItemRepository() {}
 
-    public List<Item> getItens() {
+    public List<Item> obterItens() {
         return itens;
     }
 
