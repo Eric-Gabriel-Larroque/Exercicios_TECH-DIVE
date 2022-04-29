@@ -34,8 +34,6 @@
                            maxlength="4"
                            decimalPlaces="1"
                            value="#{listaBean.item.quantidade}"
-                           required="true"
-                           requiredMessage="Quantidade do item não informado."
                            converter="javax.faces.Float"
                            emptyValue="#{null}"
                            styleClass="ui-inputnumber"
@@ -51,11 +49,9 @@
                              requiredMessage="Medida do item não informada"
                              id="lista-medidas"
             >
-                <p:message for="lista-medidas" style="font-size: .8rem"/>
                 <f:validator validatorId="StringValidator"/>
                 <f:attribute name="stringAttr" value="Medida do Item" />
-
-
+                <p:message for="lista-medidas" style="font-size: .8rem"/>
                 <f:selectItem itemValue="#{null}"
                               itemLabel="-- selecione --"
                 />
@@ -77,8 +73,8 @@
                          required="true"
                          requiredMessage="Nome do item não informado."
             >
-                <p:message for="add-item" style="font-size: 0.8rem" />
                 <f:validator validatorId="StringValidator"/>
+                <p:message for="add-item" style="font-size: 0.8rem" />
                 <f:attribute name="stringAttr" value="Nome do Item" />
             </p:inputText>
 
@@ -87,15 +83,14 @@
                     styleClass="btn-add btn-submit"
                     id="adicionar"
                     value="+"
-                    action="#{listaBean.adicionar}"
-                    update="form-remover-produto"
+                    action="#{listaBean.adicionar(listaBean.item)}"
+                    process="@form"
                    />
         </p:panelGrid>
     </h:form >
     <h:form id="form-remover-produto" styleClass="p-d-flex p-jc-center" >
         <h:selectManyListbox id="itens-cadastrados"
                              style="width: 370px"
-                             required="true"
                              value="#{listaBean.itensSelecionados}"
         >
             <f:selectItems value="#{listaBean.listaItens}"
@@ -110,9 +105,10 @@
                 id="remover"
                 value="-"
                 action="#{listaBean.removerItens()}"
-                update="form-remover-produto"
+                update="itens-cadastrados"
+                process="@form"
                />
     </h:form>
-    <p:linkButton value="Página de Impressão" outcome="impressao" styleClass="btn-link" />
+    <p:link value="Página de Impressão" outcome="impressao" styleClass="btn-link" />
 </h:body>
 </html>
