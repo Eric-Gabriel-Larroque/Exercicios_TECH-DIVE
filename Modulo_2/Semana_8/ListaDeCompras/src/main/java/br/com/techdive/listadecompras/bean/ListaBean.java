@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@ViewScoped
+@SessionScoped
 @Named
 public class ListaBean implements Serializable {
 
@@ -32,16 +32,16 @@ public class ListaBean implements Serializable {
     private List<Item> itensSelecionados = new ArrayList<>();
 
     public void init() {
-        List<Item> itensBD = itemRepository.getItens();
-        this.listaItens.addAll(itensBD);
+        List<Item> itensBD = itemRepository.obterItens();
+        listaItens = itensBD;
     }
 
 
-    public String adicionar() {
-        System.out.println("Valor do item: "+item+"\nValor do nome: "+item.getNome());
+    public String adicionar(Item itemNovo) {
+        System.out.println("Valor do item: "+itemNovo+"\nValor do nome: "+itemNovo.getNome());
 
-        boolean isItemNovo = listaItens.stream().noneMatch(i->i.getNome().equalsIgnoreCase(item.getNome()));
-        System.out.println("Nome do item: "+item.getNome());
+        boolean isItemNovo = listaItens.stream().noneMatch(i->i.getNome().equalsIgnoreCase(itemNovo.getNome()));
+        System.out.println("Nome do item: "+itemNovo.getNome());
         System.out.println("Ele é novo: "+isItemNovo);
 
         if(isItemNovo) {
@@ -52,23 +52,14 @@ public class ListaBean implements Serializable {
                 return null;
             }
             itemRepository.adicionar(item);
-            listaItens = itemRepository.getItens();
+            listaItens = itemRepository.obterItens();
         }
         item = new Item();
         return "lista?faces-redirect=true";
     }
 
-    public String removerItens() {
-        itemRepository.removerItens(itensSelecionados);
-        listaItens = itemRepository.getItens();
-        itensSelecionados = new ArrayList<>();
-        return null;
-    }
-
-    public String removerItem(String nomeDoItem) {
-        itemRepository.remover(nomeDoItem);
-        listaItens = itemRepository.getItens();
-        return null;
+    public void removerItens() {
+        listaItens.removeAll(itensSelecionados);
     }
 
     public Item getItem() {
