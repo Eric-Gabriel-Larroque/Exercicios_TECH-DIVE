@@ -25,33 +25,30 @@
     </div>
     <h:form id="form-cadastro-produto" styleClass="p-flex-column">
 
-        <p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
-            <h:outputLabel style="margin-left: 70px" value="Quantidade: " for="quantidade" />
+        <p:panelGrid columns="3" styleClass="ui-panelgrid-blank" style=" margin-left: -115px">
+            <p:message for="quantidade" style="font-size: 0.8rem" />
+            <h:outputLabel  value="Quantidade: " for="quantidade" />
             <p:inputNumber id="quantidade"
                            size="5"
+                           validator="QuantidadeValidator"
                            maxValue="99"
                            minValue="0"
                            maxlength="4"
                            decimalPlaces="1"
                            value="#{listaBean.item.quantidade}"
                            converter="javax.faces.Float"
-                           emptyValue="#{null}"
                            styleClass="ui-inputnumber"
-            >
-                <p:message for="quantidade" style="font-size: 0.8rem" />
-                <f:validator validatorId="QuantidadeValidator"/>
-                <f:attribute name="quantidade" value="Quantidade de itens" />
-            </p:inputNumber>
-
-            <p:selectOneMenu style="width: 150px"
+            />
+        </p:panelGrid>
+        <p:panelGrid columns="3" styleClass="ui-panelgrid-blank" style=" margin-left: -110px">
+            <p:message for="lista-medidas" style="font-size: .8rem"/>
+            <h:outputLabel value="Medida: " for="lista-medidas" />
+            <p:selectOneMenu style="width: 150px;"
                              value="#{listaBean.item.medida}"
                              required="true"
                              requiredMessage="Medida do item não informada"
                              id="lista-medidas"
             >
-                <f:validator validatorId="StringValidator"/>
-                <f:attribute name="stringAttr" value="Medida do Item" />
-                <p:message for="lista-medidas" style="font-size: .8rem"/>
                 <f:selectItem itemValue="#{null}"
                               itemLabel="-- selecione --"
                 />
@@ -64,20 +61,15 @@
             </p:selectOneMenu>
         </p:panelGrid>
 
-        <p:panelGrid columns="3" id="panel-items" styleClass="ui-panelgrid-blank">
+        <p:panelGrid columns="4" id="panel-items" styleClass="ui-panelgrid-blank">
+            <p:message for="add-item" style="font-size: 0.8rem" escape="false"/>
             <h:outputLabel value="Item: " for="add-item"/>
             <p:inputText maxlength="30"
                          styleClass="add-item"
+                         validator="StringValidator"
                          value="#{listaBean.item.nome}"
                          id="add-item"
-                         required="true"
-                         requiredMessage="Nome do item não informado."
-            >
-                <f:validator validatorId="StringValidator"/>
-                <p:message for="add-item" style="font-size: 0.8rem" />
-                <f:attribute name="stringAttr" value="Nome do Item" />
-            </p:inputText>
-
+            />
             <p:commandButton
 
                     styleClass="btn-add btn-submit"
@@ -85,6 +77,7 @@
                     value="+"
                     action="#{listaBean.adicionar(listaBean.item)}"
                     process="@form"
+                    update="@form"
                    />
         </p:panelGrid>
     </h:form >
