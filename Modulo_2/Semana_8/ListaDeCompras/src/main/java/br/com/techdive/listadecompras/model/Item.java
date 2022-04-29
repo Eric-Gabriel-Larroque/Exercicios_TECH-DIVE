@@ -8,7 +8,7 @@ public class Item {
     @NotEmpty(message = "{attr.nome.nulo}")
     private String nome;
 
-    @PositiveOrZero(message = "{attr.quantidade.menorQueZero}")
+    @PositiveOrZero(message = "{attr.quantidade.negativa}")
     private float quantidade;
 
     @NotEmpty(message = "{attr.medida.nula}")
