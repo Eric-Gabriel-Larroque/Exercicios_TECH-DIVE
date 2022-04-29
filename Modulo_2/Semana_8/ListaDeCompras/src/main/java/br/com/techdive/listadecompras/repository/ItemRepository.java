@@ -24,9 +24,7 @@ public class ItemRepository {
         itens.removeIf(i-> i.getNome().equalsIgnoreCase(nomeDoItem));
     }
     public void removerItens(List<Item> itensSelecionados) {
-        for(Item item: itensSelecionados) {
-            itens.removeIf(i-> i.getNome().equalsIgnoreCase(item.getNome()));
-        }
+       itens.removeAll(itensSelecionados);
     }
 
     public boolean existe(String nomeDoItem) {

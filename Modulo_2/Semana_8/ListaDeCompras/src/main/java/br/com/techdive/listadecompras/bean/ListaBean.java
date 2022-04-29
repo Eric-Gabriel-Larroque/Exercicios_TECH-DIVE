@@ -59,7 +59,8 @@ public class ListaBean implements Serializable {
     }
 
     public void removerItens() {
-        listaItens.removeAll(itensSelecionados);
+        itemRepository.removerItens(itensSelecionados);
+        listaItens = itemRepository.obterItens();
     }
 
     public Item getItem() {
