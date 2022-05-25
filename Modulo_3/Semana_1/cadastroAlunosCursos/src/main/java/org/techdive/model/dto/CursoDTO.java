@@ -6,14 +6,14 @@ import javax.validation.constraints.Positive;
 
 public class CursoDTO {
 
-    @NotBlank(message = "{curso.codigo.notblank}")
+    @NotBlank(message = "Código do curso não pode ser vazio!")
     private String codigo;
 
-    @NotBlank(message = "{curso.assunto.notblank}")
+    @NotBlank(message = "Assunto do código não pode ser vazio!")
     private String assunto;
 
-    @Positive(message = "{curso.duracao.positive}")
-    @NotNull(message = "{curso.duracao.notnull}")
+    @Positive(message = "Duração do curso deve ser um valor inteiro positivo!")
+    @NotNull(message = "Duracao do curso não pode ser vazia!")
     private int duracao;
 
     public CursoDTO() {}
