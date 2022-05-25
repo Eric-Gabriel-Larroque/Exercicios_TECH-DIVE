@@ -9,17 +9,17 @@ public class Aluno {
 
     @Id
     @Column(name = "matricula")
-    private String matricula;
+    private int matricula;
 
     private String nome;
 
     public Aluno() {}
 
-    public String getMatricula() {
+    public int getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(String matricula) {
+    public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
 
