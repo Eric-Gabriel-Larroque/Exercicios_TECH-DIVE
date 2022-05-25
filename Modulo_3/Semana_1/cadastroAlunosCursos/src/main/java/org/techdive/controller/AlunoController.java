@@ -59,8 +59,6 @@ public class AlunoController {
             alunoAtualizacaoDTO.setMatricula(matricula);
             AlunoDTO alunoAtualizado = alunoService.atualizarAluno(alunoAtualizacaoDTO);
             return Response.ok(alunoAtualizado).build();
-        } catch (RegistroExistenteException e) {
-            return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
         } catch (RegistroNaoEncontradoException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }

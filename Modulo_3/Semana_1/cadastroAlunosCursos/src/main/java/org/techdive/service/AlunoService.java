@@ -43,11 +43,8 @@ public class AlunoService {
         return mapper.map(aluno,AlunoDTO.class);
     }
 
-    public AlunoDTO atualizarAluno(AlunoAtualizacaoDTO alunoAtualizacaoDTO) throws RegistroExistenteException, RegistroNaoEncontradoException {
+    public AlunoDTO atualizarAluno(AlunoAtualizacaoDTO alunoAtualizacaoDTO) throws RegistroNaoEncontradoException {
         Optional<Aluno> alunoOpt = alunoRepository.obterAlunoPorMatricula(alunoAtualizacaoDTO.getMatricula());
-        if(alunoOpt.stream().toList().size()>1) {
-            throw new RegistroExistenteException(Aluno.class.getSimpleName(),String.valueOf(alunoAtualizacaoDTO.getMatricula()));
-        }
         verificaSeExisteAlunoPorMatricula(alunoAtualizacaoDTO.getMatricula(),alunoOpt);
         Aluno aluno = mapper.map(alunoAtualizacaoDTO,Aluno.class);
         alunoRepository.atualizar(aluno);
