@@ -1,5 +1,6 @@
 package org.techdive.controller;
 
+import org.techdive.model.dto.CursoAtualizacaoDTO;
 import org.techdive.model.dto.CursoDTO;
 import org.techdive.service.CursoService;
 
@@ -39,9 +40,9 @@ public class CursoController {
 
     @PUT
     @Path("/{codigo}")
-    public Response atualizarCurso(@PathParam("codigo") String codigo, @Valid CursoDTO cursoDTO) {
-        cursoDTO.setCodigo(codigo);
-        CursoDTO cursoAtualizado = cursoService.atualizarCurso(cursoDTO);
+    public Response atualizarCurso(@PathParam("codigo") String codigo, @Valid CursoAtualizacaoDTO cursoAtualizacaoDTO) {
+        cursoAtualizacaoDTO.setCodigo(codigo);
+        CursoDTO cursoAtualizado = cursoService.atualizarCurso(cursoAtualizacaoDTO);
         return Response.ok(cursoAtualizado).build();
     }
 

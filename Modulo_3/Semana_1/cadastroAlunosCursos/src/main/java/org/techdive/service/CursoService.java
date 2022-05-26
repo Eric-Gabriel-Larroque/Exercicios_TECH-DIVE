@@ -3,6 +3,7 @@ package org.techdive.service;
 import org.modelmapper.ModelMapper;
 import org.techdive.exception.RegistroExistenteException;
 import org.techdive.exception.RegistroNaoEncontradoException;
+import org.techdive.model.dto.CursoAtualizacaoDTO;
 import org.techdive.model.dto.CursoDTO;
 import org.techdive.model.entity.Curso;
 import org.techdive.repository.CursoRepository;
@@ -51,8 +52,8 @@ public class CursoService {
     }
 
 
-    public CursoDTO atualizarCurso(CursoDTO cursoDTO) {
-        Curso cursoEncontrado = mapper.map(obterCursoPorCodigo(cursoDTO.getCodigo()),Curso.class);
+    public CursoDTO atualizarCurso(CursoAtualizacaoDTO cursoAtualizacaoDTO) {
+        Curso cursoEncontrado = mapper.map(obterCursoPorCodigo(cursoAtualizacaoDTO.getCodigo()),Curso.class);
         cursoRepository.atualizarCurso(cursoEncontrado);
         return mapper.map(cursoEncontrado,CursoDTO.class);
     }
