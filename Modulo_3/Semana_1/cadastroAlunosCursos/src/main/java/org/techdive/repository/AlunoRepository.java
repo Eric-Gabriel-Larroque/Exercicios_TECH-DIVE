@@ -19,12 +19,12 @@ public class AlunoRepository implements Serializable {
     EntityManager em;
 
     public List<Aluno> obterAlunos(String nome) {
-        TypedQuery<Aluno> query = popularCampoNome(nome);
+        TypedQuery<Aluno> query = montarHqlNomeAluno(nome);
         query = nome!=null&&!nome.isBlank() ? query.setParameter("nome",nome) : query;
         return query.getResultList();
     }
 
-    private TypedQuery<Aluno> popularCampoNome(String nome) {
+    private TypedQuery<Aluno> montarHqlNomeAluno(String nome) {
         String jpql = "SELECT a FROM Aluno a ";
         jpql = nome!=null&&!nome.isBlank() ? jpql.concat("WHERE a.nome LIKE :nome") : jpql;
         return em.createQuery(jpql,Aluno.class);

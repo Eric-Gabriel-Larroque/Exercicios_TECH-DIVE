@@ -1,18 +1,12 @@
 package org.techdive.exception;
 
-public class RegistroNaoEncontradoException extends Exception {
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
-    private final String tipoRegistro;
-    private final String identificador;
+public class RegistroNaoEncontradoException extends WebApplicationException {
 
     public RegistroNaoEncontradoException(String tipoRegistro, String identificador) {
-        this.tipoRegistro = tipoRegistro;
-        this.identificador = identificador;
-    }
-
-    @Override
-    public String getMessage() {
-        return String.format("%s: Registro não encontrado com identificador: %s", tipoRegistro, identificador);
+        super(String.format("%s: Registro não encontrado com identificador: %s", tipoRegistro, identificador), Response.Status.NOT_FOUND);
     }
 
 }
