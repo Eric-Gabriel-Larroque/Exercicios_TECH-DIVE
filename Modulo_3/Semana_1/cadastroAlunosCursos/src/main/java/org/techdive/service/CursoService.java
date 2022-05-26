@@ -53,9 +53,10 @@ public class CursoService {
 
 
     public CursoDTO atualizarCurso(CursoAtualizacaoDTO cursoAtualizacaoDTO) {
-        Curso cursoEncontrado = mapper.map(obterCursoPorCodigo(cursoAtualizacaoDTO.getCodigo()),Curso.class);
-        cursoRepository.atualizarCurso(cursoEncontrado);
-        return mapper.map(cursoEncontrado,CursoDTO.class);
+        obterCursoPorCodigo(cursoAtualizacaoDTO.getCodigo());
+        Curso curso = mapper.map(cursoAtualizacaoDTO,Curso.class);
+        cursoRepository.atualizarCurso(curso);
+        return mapper.map(curso,CursoDTO.class);
     }
 
     public void deletarCurso(String codigo) {
