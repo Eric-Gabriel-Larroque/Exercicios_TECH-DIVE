@@ -7,6 +7,7 @@ public class Inscricao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(insertable = false, updatable = false, unique = true)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
