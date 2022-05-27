@@ -12,6 +12,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class CursoService {
@@ -23,7 +24,7 @@ public class CursoService {
 
     public List<CursoDTO> obterCursos(String sortBy, int limit) {
         List<Curso> cursos = cursoRepository.obterCursos(sortBy,limit);
-        return cursos.stream().map(curso -> mapper.map(curso,CursoDTO.class)).toList();
+        return cursos.stream().map(curso -> mapper.map(curso,CursoDTO.class)).collect(Collectors.toList());
     }
 
 
