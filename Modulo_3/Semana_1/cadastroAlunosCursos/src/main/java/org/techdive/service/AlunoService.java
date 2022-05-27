@@ -12,6 +12,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class AlunoService {
@@ -26,7 +27,7 @@ public class AlunoService {
         if(alunos.isEmpty()) {
             throw new RegistroNaoEncontradoException(Aluno.class.getSimpleName(),nome);
         }
-        return alunos.stream().map(aluno -> mapper.map(aluno, AlunoDTO.class)).toList();
+        return alunos.stream().map(aluno -> mapper.map(aluno, AlunoDTO.class)).collect(Collectors.toList());
     }
 
     public AlunoDTO obterAlunoPorMatricula(int matricula)  {
