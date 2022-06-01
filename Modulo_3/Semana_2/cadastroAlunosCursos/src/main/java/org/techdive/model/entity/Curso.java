@@ -17,6 +17,12 @@ public class Curso {
 
     public Curso() {}
 
+    public Curso(String codigo, String assunto, int duracao) {
+        this.codigo = codigo;
+        this.assunto = assunto;
+        this.duracao = duracao;
+    }
+
     public String getCodigo() {
         return codigo;
     }
