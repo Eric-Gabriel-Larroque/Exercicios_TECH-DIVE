@@ -22,8 +22,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.techdive.utils.EntityCreationHandler.criarCurso;
 import static org.techdive.utils.EntityCreationHandler.criarCursoAtualizacaoDTO;
 
@@ -165,14 +164,10 @@ class CursoServiceTest {
     }
 
     @Test
-    @DisplayName("DADO a requisição DELETE, QUANDO chamada e houver Curso com o código encontrado, DEVE me retornar nada")
+    @DisplayName("DADO a requisição DELETE, QUANDO chamada e houver Curso com o código encontrado, DEVE removê-lo de tal forma que não me retorne uma exceção.")
     public void removerCurso_sucesso() {
         Curso curso = criarCurso();
         Mockito.when(repository.obterCursoPeloCodigo(anyString())).thenReturn(Optional.of(curso));
-        CursoDTO cursoEncontrado = service.obterCursoPorCodigo(curso.getCodigo());
-        service.deletarCurso(cursoEncontrado.getCodigo());
-        assertNotNull(cursoEncontrado);
-        assertNotNull(cursoEncontrado.getCodigo());
-        assertInstanceOf(CursoDTO.class,cursoEncontrado);
+       assertDoesNotThrow(() -> service.deletarCurso(curso.getCodigo()));
     }
 }
