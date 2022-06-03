@@ -35,7 +35,7 @@ public class AlunoController {
     @POST
     public Response inserirAluno(@Valid AlunoDTO alunoDTO) {
         AlunoDTO alunoCriado = alunoService.inserirAluno(alunoDTO);
-        return Response.ok(alunoCriado).build();
+        return Response.status(Response.Status.CREATED).entity(alunoCriado).build();
     }
 
     @PUT

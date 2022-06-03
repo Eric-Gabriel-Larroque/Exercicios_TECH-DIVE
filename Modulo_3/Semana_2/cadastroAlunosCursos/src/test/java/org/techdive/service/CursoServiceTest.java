@@ -23,8 +23,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.techdive.utils.EntityCreationHandler.criarCurso;
-import static org.techdive.utils.EntityCreationHandler.criarCursoAtualizacaoDTO;
+import static org.techdive.utils.EntityCreationHandler.*;
 
 @DisplayName("Testes CursoService")
 @ExtendWith(MockitoExtension.class)
@@ -65,6 +64,24 @@ class CursoServiceTest {
         assertNotNull(cursosObtidos,"Deveria retornar lista não nula de Cursos");
         assertFalse(cursosObtidos.isEmpty(),"Deveria me retornar uma lista não vazia de Cursos");
         assertEquals(listaCursos.size(),cursosObtidos.size());
+    }
+
+    @Test
+    @DisplayName("DADO a requisição GET, QUANDO houverem cursos disponíveis E limite setado, DEVE me retornar array de Cursos com size igual ao valor do limite")
+    void obterCursos_limiteSetado() {
+        //given
+        int limite = 2;
+        List<Curso> listaCursos = criarListaCurso();
+
+        //when
+        Mockito.when(repository.obterCursos(null,limite)).thenReturn(listaCursos.stream().limit(limite).collect(Collectors.toList()));
+        List<CursoDTO> cursosObtidos = service.obterCursos(null,limite);
+
+        //then
+        assertNotNull(cursosObtidos,"Deveria retornar lista não nula de Cursos");
+        assertFalse(cursosObtidos.isEmpty(),"Deveria me retornar uma lista não vazia de Cursos");
+        assertNotEquals(listaCursos.size(),cursosObtidos.size());
+        assertEquals(limite,cursosObtidos.size());
     }
 
     @Test

@@ -17,15 +17,14 @@ import org.techdive.model.entity.Aluno;
 import org.techdive.repository.AlunoRepository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.techdive.utils.EntityCreationHandler.criarAluno;
-import static org.techdive.utils.EntityCreationHandler.criarAlunoAtualizacaoDTO;
+import static org.techdive.utils.EntityCreationHandler.*;
 
 @DisplayName("Testes AlunoService")
 @ExtendWith(MockitoExtension.class)
@@ -54,7 +53,12 @@ class AlunoServiceTest {
     @DisplayName("DADO a requisição GET para obtenção de alunos, QUANDO houverem alunos disponiveis com o nome pesquisado, DEVE me retornar uma lista de alunos")
     public void obterAlunos_sucesso() {
         Aluno aluno = criarAluno();
-        Mockito.when(repository.obterAlunos(anyString())).thenReturn(Arrays.asList(aluno));
+        aluno.setNome("nome1");
+        List<Aluno> listaAlunos = criarListaAluno();
+        Mockito.when(repository.obterAlunos(aluno.getNome()))
+                .thenReturn(listaAlunos.stream()
+                        .filter(a->a.getNome().equals(aluno.getNome()))
+                        .collect(Collectors.toList()));
         List<AlunoDTO> alunosEncontrados = service.obterAlunos(aluno.getNome());
 
         assertNotNull(alunosEncontrados);
