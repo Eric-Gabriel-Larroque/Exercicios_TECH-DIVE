@@ -21,7 +21,7 @@ public class InscricaoRepository implements Serializable {
         em.persist(inscricao);
     }
 
-    public List<Inscricao> obterCursos() {
+    public List<Inscricao> obterInscricoes() {
 
         String jpql = "SELECT i FROM Inscricao i";
         return em.createQuery(jpql,Inscricao.class).getResultList();

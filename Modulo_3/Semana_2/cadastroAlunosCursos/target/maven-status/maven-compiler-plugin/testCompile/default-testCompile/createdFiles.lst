@@ -1,0 +1,6 @@
+org/techdive/service/CursoServiceTest.class
+org/techdive/service/AlunoServiceTest.class
+org/techdive/service/InscricaoServiceTest.class
+org/techdive/controller/AlunoControllerTest.class
+org/techdive/utils/EntityCreationHandler.class
+org/techdive/controller/CursoControllerTest.class

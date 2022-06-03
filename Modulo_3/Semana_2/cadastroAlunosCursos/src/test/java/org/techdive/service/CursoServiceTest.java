@@ -22,10 +22,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.techdive.utils.EntityCreationHandler.criarCurso;
-import static org.techdive.utils.EntityCreationHandler.criarCursoAtualizacaoDTO;
+import static org.mockito.ArgumentMatchers.*;
+import static org.techdive.utils.EntityCreationHandler.*;
 
 @DisplayName("Testes CursoService")
 @ExtendWith(MockitoExtension.class)
@@ -66,6 +64,24 @@ class CursoServiceTest {
         assertNotNull(cursosObtidos,"Deveria retornar lista não nula de Cursos");
         assertFalse(cursosObtidos.isEmpty(),"Deveria me retornar uma lista não vazia de Cursos");
         assertEquals(listaCursos.size(),cursosObtidos.size());
+    }
+
+    @Test
+    @DisplayName("DADO a requisição GET, QUANDO houverem cursos disponíveis E limite setado, DEVE me retornar array de Cursos com size igual ao valor do limite")
+    void obterCursos_limiteSetado() {
+        //given
+        int limite = 2;
+        List<Curso> listaCursos = criarListaCurso();
+
+        //when
+        Mockito.when(repository.obterCursos(null,limite)).thenReturn(listaCursos.stream().limit(limite).collect(Collectors.toList()));
+        List<CursoDTO> cursosObtidos = service.obterCursos(null,limite);
+
+        //then
+        assertNotNull(cursosObtidos,"Deveria retornar lista não nula de Cursos");
+        assertFalse(cursosObtidos.isEmpty(),"Deveria me retornar uma lista não vazia de Cursos");
+        assertNotEquals(listaCursos.size(),cursosObtidos.size());
+        assertEquals(limite,cursosObtidos.size());
     }
 
     @Test
@@ -165,14 +181,10 @@ class CursoServiceTest {
     }
 
     @Test
-    @DisplayName("DADO a requisição DELETE, QUANDO chamada e houver Curso com o código encontrado, DEVE me retornar nada")
+    @DisplayName("DADO a requisição DELETE, QUANDO chamada e houver Curso com o código encontrado, DEVE removê-lo de tal forma que não me retorne uma exceção.")
     public void removerCurso_sucesso() {
         Curso curso = criarCurso();
         Mockito.when(repository.obterCursoPeloCodigo(anyString())).thenReturn(Optional.of(curso));
-        CursoDTO cursoEncontrado = service.obterCursoPorCodigo(curso.getCodigo());
-        service.deletarCurso(cursoEncontrado.getCodigo());
-        assertNotNull(cursoEncontrado);
-        assertNotNull(cursoEncontrado.getCodigo());
-        assertInstanceOf(CursoDTO.class,cursoEncontrado);
+       assertDoesNotThrow(() -> service.deletarCurso(curso.getCodigo()));
     }
 }

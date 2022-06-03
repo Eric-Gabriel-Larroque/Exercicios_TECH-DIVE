@@ -46,7 +46,7 @@ public class InscricaoService {
     }
 
     public List<InscricaoResponseDTO> obterInscricoes() {
-        List<Inscricao> inscricoes = inscricaoRepository.obterCursos();
+        List<Inscricao> inscricoes = inscricaoRepository.obterInscricoes();
         List<InscricaoResponseDTO> responseDTOS = new ArrayList<>();
         for(Inscricao inscricao: inscricoes) {
             InscricaoResponseDTO responseDTO = new InscricaoResponseDTO();
