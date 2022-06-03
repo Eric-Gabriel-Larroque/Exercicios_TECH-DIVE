@@ -28,7 +28,7 @@ public class InscricaoController {
     @POST
     public Response inserirInscricao(@Valid InscricaoRequestDTO inscricaoRequestDTO) {
         InscricaoResponseDTO inscricaoCriada = inscricaoService.inserirInscricao(inscricaoRequestDTO);
-        return Response.ok(inscricaoCriada).build();
+        return Response.status(Response.Status.CREATED).entity(inscricaoCriada).build();
     }
 
     @DELETE
